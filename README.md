@@ -48,12 +48,6 @@
 
 An interactive, 3D art gallery featuring paintings and sketchings that I have done over the past while. This is a React-based application that leverages React-Three-Fiber to render my art in 3D with moving spotlights, smooth horizontal scrolling, interactive mouse movement, realistic lighting with shadows, and postprocessing to add effects to the scene including noise and filters.
 
-See and play with my deployed demo at: https://cynthia-3d-art-gallery.netlify.app/
-
-
-https://user-images.githubusercontent.com/20048911/167222076-aeb6a9a5-eb95-452f-88c9-d582e9ce5bf2.mp4
-
-<!--![Alt Text](demo.gif)-->
 
 ## :sparkles: Features ##
 
@@ -93,14 +87,3 @@ $ npm start
 
 # The server will initialize in the <http://localhost:3000>
 ```
-
-## :memo: License ##
-
-This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
-
-
-Made with :heart: by <a href="https://github.com/cynthiachiu" target="_blank">cynthiachiu</a>
-
-&#xa0;
-
-<a href="#top">Back to top</a>
