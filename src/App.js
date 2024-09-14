@@ -6,6 +6,7 @@ import { TextureLoader, Vector3, Color } from 'three';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
+
 const ART_PIECES = [
   { title: 'Beautiful Beast', imgPath: '/beauty_and_beast.jpeg', price: "\u20B9 400" },
   { title: 'Stillness', imgPath: '/crane.jpeg', price: "\u20B9 400" },
