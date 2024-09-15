@@ -1,0 +1,47 @@
+/* Basic styling for layout */
+.landing-page {
+  text-align: center;
+}
+
+.hero-section {
+  height: 90vh;
+  background-image: url('https://designerapp.officeapps.live.com/designerapp/document.ashx?path=/7bb2fcfe-2fbe-4505-a8e5-6e385c0de53b/DallEGeneratedImages/dalle-20f61da9-8b07-469e-b30f-f670b50d8ace0251675992924908075100.jpg&dcHint=JapanEast&fileToken=ae86d277-3849-4a5f-ae7d-5064509c1273'); /* Replace with your image path */
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-section h1 {
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+  animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+  to {
+      opacity: 1;
+  }
+}
+
+.category-grid {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.category {
+  width: 20%;
+  transition: transform 0.3s;
+}
+
+.category:hover {
+  transform: scale(1.1);
+}
+
+.explore-button:hover {
+  background-color: gold; /* Simple hover effect */
+}
+
+/* Add more styles for animations and responsive design */

@@ -20,3 +20,184 @@ body,
   margin: 0;
   padding: 0;
 }
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.faq-box, .contact-box {
+  padding: 40px 80px; /* Adjusted padding inside the boxes */
+  margin: 30px 100px;
+  background: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px; /* Adds space below the header */
+}
+
+.faq-item p {
+  cursor: pointer;
+  margin: 10px 0;
+}
+.arrow {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 0.3s ease;
+}
+
+.faq-item.open .arrow {
+  transform: rotate(45deg); /* Rotates the arrow to indicate open state */
+}
+
+.faq-item p {
+  cursor: pointer;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-item p:hover {
+  color: #007BFF; /* Highlight color on hover */
+}
+
+
+.faq-item p:hover {
+  color: #007BFF; /* Highlight color on hover */
+}
+
+/* Optional: add some transition effects for smooth opening/closing */
+.faq-item p {
+  transition: color 0.3s ease;
+}
+
+.contact-info, .social-media {
+  text-align: left;
+  margin-top: 10px; /* Reduced vertical spacing */
+}
+
+p, li {
+  color: #666;
+  font-size: 16px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px; /* Ensures button is not too close to text */
+}
+
+/* General body styling */
+/* Wrapper around the carousel to manage overflow and positioning */
+.carousel-wrapper {
+  position: relative;
+  width: 1000px; /* Increased width to accommodate larger cards */
+  overflow: hidden;
+  margin: 40px auto; /* Increased margin for better spacing */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2); /* Enhanced shadow for better depth */
+}
+
+.carousel1 {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  will-change: transform; 
+}
+
+/* Individual card styling */
+.card {
+  flex: 0 0 auto;
+  width: 250px; 
+  height: 350px;
+  margin: 20px; 
+  background-color: #fff; 
+  border-radius: 12px; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-image img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease, filter 0.3s ease; 
+}
+
+/* Hover effects on the card image */
+.card-image:hover img {
+  filter: blur(1px) brightness(80%); 
+  transform: scale(1.15);
+}
+
+.card-info {
+  padding: 15px; /* Increased padding around text */
+  text-align: center; /* Center align text */
+}
+
+h3, p {
+  margin: 10px 0; /* Increased margin for heading and paragraph within card-info */
+}
+
+/* Navigation buttons styling */
+.prev, .next {
+  position: absolute;
+  top: 50%; /* Align buttons vertically in the middle */
+  transform: translateY(-50%); /* Offset transform to perfectly center */
+  background-color: #f8f9fa; /* Button background color */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor on hover */
+  padding: 15px 25px; /* Larger padding inside buttons */
+  font-size: 26px; /* Slightly larger font size for better visibility */
+  color: #333; /* Button text color */
+  z-index: 100; /* Ensure buttons are above other content */
+}
+
+.prev {
+  left: 10px; /* Slightly more inward to align with the larger card size */
+}
+
+.next {
+  right: 10px; /* Slightly more inward to align with the larger card size */
+}
+
+.page-background{
+  background-color: #1D2951;
+}
+
+
+
+
+
+
