@@ -15,24 +15,24 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 const ART_PIECES = [
   {
     title: "Beautiful Beast",
-    imgPath: "/beauty_and_beast.jpeg",
+    imgPath: "assests/images/beauty_and_beast.jpeg",
     price: "\u20B9 400",
   },
-  { title: "Stillness", imgPath: "/crane.jpeg", price: "\u20B9 400" },
-  { title: "Foxy", imgPath: "/foxy.jpeg", price: "\u20B9 400" },
-  { title: "Gentle Giant", imgPath: "/horse_sketch.jpeg", price: "\u20B9 400" },
-  { title: "Purity", imgPath: "/kindness.jpeg", price: "\u20B9 400" },
+  { title: "Stillness", imgPath: "assests/images/foxy.jpeg", price: "\u20B9 400" },
+  { title: "Foxy", imgPath: "assests/images/foxy.jpeg", price: "\u20B9 400" },
+  { title: "Gentle Giant", imgPath: "assests/images/horse_sketch.jpeg", price: "\u20B9 400" },
+  { title: "Purity", imgPath: "assests/images/kindness.jpeg", price: "\u20B9 400" },
   {
     title: "Lonely Together",
-    imgPath: "/lonely_together.jpeg",
+    imgPath: "assests/images/lonely_together.jpeg",
     price: "₹ 400",
   },
-  { title: "Owl", imgPath: "/owl.jpeg", price: "₹ 400" },
-  { title: "Menace", imgPath: "/panther.jpeg", price: "\u20B9 400" },
-  { title: "Paradise", imgPath: "/paradise.jpeg", price: "₹ 400" },
-  { title: "Friendship", imgPath: "/sprited_away.jpeg", price: "₹ 400" },
-  { title: "Wanderlust", imgPath: "/wonder.jpeg", price: "₹ 400" },
-  { title: "Serenity", imgPath: "/forest.jpeg", price: "₹ 400" },
+  { title: "Owl", imgPath: "assests/images/owl.jpeg", price: "₹ 400" },
+  { title: "Menace", imgPath: "assests/images/panther.jpeg", price: "\u20B9 400" },
+  { title: "Paradise", imgPath: "assests/images/paradise.jpeg", price: "₹ 400" },
+  { title: "Friendship", imgPath: "assests/images/sprited_away.jpeg", price: "₹ 400" },
+  { title: "Wanderlust", imgPath: "assests/images/wonder.jpeg", price: "₹ 400" },
+  { title: "Serenity", imgPath: "assests/images/forest.jpeg", price: "₹ 400" },
 ];
 
 const WallArt = (props) => {
@@ -99,55 +99,38 @@ const WallArt = (props) => {
       </mesh>
 
       {/* Price below the artwork */}
-      {art.price && (
-        <mesh position={[xPosition, yPositionPrice, 0]}>
-          <planeGeometry args={[1.5, 0.6]} />{" "}
-          {/* Adjust dimensions if needed */}
-          <meshStandardMaterial color={0xfaebd7} />
           <Text
-            position-z={0.1}
-            scale={[3, 3, 3]}
+    position={[xPosition, yPositionPrice, 0]}
+    scale={[2, 2, 2]}
             color="black"
             anchorX="center"
             anchorY="middle"
             font="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap"
           >
-            {art.price}
+    {`$${art.price}`}
           </Text>
-        </mesh>
-      )}
 
       {/* Add to Cart Button below the price */}
       <mesh
-        position={[xPosition, yPositionButton, 0]} // Adjust position to be closer to the art
-        onClick={handleAddToCart} // Use the new function
-        onPointerOver={(e) => e.stopPropagation()} // Prevent event bubbling
-        onPointerDown={(e) => e.stopPropagation()} // Prevent event bubbling
+    position={[xPosition, yPositionButton, 0]}
+    onClick={handleAddToCart}
+    onPointerOver={(e) => e.stopPropagation()}
+    onPointerDown={(e) => e.stopPropagation()}
       >
-        {/* Rounded corners with vibrant color */}
         <planeGeometry args={[1.4, 0.6]} />
-        <meshStandardMaterial color={0x1e90ff} /> {/* Vibrant blue color */}
-        {/* Slightly offset to add shadow effect */}
-        <mesh
-          position={[0, 0, 0.01]} // Create a shadow effect
-          scale={[1.05, 1.05, 1]} // Slightly larger for shadow
-        >
-          <planeGeometry args={[1.5, 0.7]} />
-          <meshStandardMaterial color={0xff6666} />{" "}
-          {/* Lighter blue for shadow */}
-        </mesh>
-        {/* Add text with bolder and more eye-catching font */}
+    <meshStandardMaterial color={0x1e90ff} />
         <Text
-          position-z={0.1} // Position text slightly above button
-          scale={[2.2, 2.2, 2.2]} // Larger scale for prominence
-          color="white" // Change text color to white for better contrast
+      position-z={0.1}
+      scale={[2.2, 2.2, 2.2]}
+      color="white"
           anchorX="center"
           anchorY="middle"
-          font="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" // Bold Roboto font for clear visibility
+      font="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
         >
           Add to Cart
         </Text>
       </mesh>
+
     </group>
   );
 };
