@@ -1,5 +1,6 @@
 import React from 'react';
 import TopArtist from './topArtist';
+import Icon from './icon';
 
 const BottomSection = () => {
   const artists = [
@@ -36,6 +37,7 @@ const BottomSection = () => {
         Top Artists
       </h1>
       <TopArtist artists={artists} />
+      <Icon/>
     </div>
   );
 };

@@ -1,0 +1,41 @@
+/* Container for all icon boxes */
+.icon-container {
+  display: flex;
+  justify-content: space-between; /* Spreads items evenly */
+  align-items: center; /* Centers the items vertically */
+  width: 100%;
+  max-width: 1200px; /* Adjust this for your design */
+  margin: 0 auto; /* Center the container */
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Individual box containing an icon and its text */
+.icon-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1; /* Flex-grow to evenly distribute the boxes */
+  padding: 20px;
+}
+
+/* Styling for the icons */
+.icon {
+  font-size: 48px; /* Increase icon size */
+  margin-bottom: 20px;
+  color: black; /* Icon color */
+}
+
+/* Heading */
+.icon-box h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Description paragraph */
+.icon-box p {
+  font-size: 14px;
+  color: #555;
+  max-width: 250px; /* Limits the paragraph width for better readability */
+}
