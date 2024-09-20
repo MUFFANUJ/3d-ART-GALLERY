@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  justify-content: center; /* Centers content horizontally */
+  width: 100%; /* Full width container */
+}
+
+.image {
+  width: 100%; /* Full width of the container */
+  height: auto; /* Maintains aspect ratio */
+  cursor: pointer; /* Indicates it’s clickable */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.image:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}

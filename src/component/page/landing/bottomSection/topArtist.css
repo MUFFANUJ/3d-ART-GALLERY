@@ -1,0 +1,78 @@
+/* Carousel container */
+.carousel-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto; /* Center the carousel */
+  overflow: hidden; /* Hide the overflowing images */
+}
+
+/* Wrapper for the images */
+.carousel-images-wrapper {
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Images container (moves left-right) */
+.carousel-images {
+  display: flex;
+  transition: transform 0.5s ease-in-out; /* Smooth sliding effect */
+}
+
+/* Individual image container */
+.carousel-item {
+  flex: 1 0 25%; /* Each item takes 25% of the width (4 items per row) */
+  padding: 10px;
+  text-align: center;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 200px; /* Fixed height for consistent sizing */
+  object-fit: cover; /* Ensures all images are cropped to fit and consistent */
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.artist-info {
+  font-size: 14px;
+  color: #333;
+}
+
+.artist-name {
+  font-weight: bold;
+}
+
+.artist-description {
+  font-style: italic;
+}
+
+/* Prev and Next buttons */
+.carousel-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.carousel-button.prev {
+  left: 10px;
+}
+
+.carousel-button.next {
+  right: 10px;
+}
+
+.carousel-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
