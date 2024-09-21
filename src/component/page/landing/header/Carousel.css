@@ -44,11 +44,13 @@
   padding: 20px;
   box-sizing: border-box;
   border-radius: 20px;
+  background-color: rgba(100, 100, 100, 0.5); /* Light grey with transparency */
   font-family: 'Playfair Display', serif;
   font-size: 24px;
   font-weight: bold;
   line-height: 1.3;
 }
+
 
 .text-container * { 
   color: inherit; 

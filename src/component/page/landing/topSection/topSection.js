@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import Category from "./categories";
+import Button from "./button";
 // import Collection from './Collection'; 
 
 const Topsection = () => {
@@ -12,6 +13,7 @@ const Topsection = () => {
 
   return (
     <div>
+      <Button/>
       <h1 style={{
         textAlign: "center",
         margin: "20px 0",
