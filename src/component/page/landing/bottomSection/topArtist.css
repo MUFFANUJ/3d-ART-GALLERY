@@ -1,5 +1,5 @@
 /* Carousel container */
-.carousel-container {
+.top-artist-carousel-container {
   display: flex;
   align-items: center;
   position: relative;
@@ -10,26 +10,26 @@
 }
 
 /* Wrapper for the images */
-.carousel-images-wrapper {
+.top-artist-carousel-images-wrapper {
   width: 100%;
   display: flex;
   overflow: hidden;
 }
 
 /* Images container (moves left-right) */
-.carousel-images {
+.top-artist-carousel-images {
   display: flex;
   transition: transform 0.5s ease-in-out; /* Smooth sliding effect */
 }
 
 /* Individual image container */
-.carousel-item {
+.top-artist-carousel-item {
   flex: 1 0 25%; /* Each item takes 25% of the width (4 items per row) */
   padding: 10px;
   text-align: center;
 }
 
-.carousel-image {
+.top-artist-carousel-image {
   width: 100%;
   height: 200px; /* Fixed height for consistent sizing */
   object-fit: cover; /* Ensures all images are cropped to fit and consistent */
@@ -37,24 +37,33 @@
   margin-bottom: 10px;
 }
 
-.artist-info {
-  font-size: 14px;
+.top-artist-artist-info {
+  font-size: 16px; /* Increase font size for better visibility */
   color: #333;
+  display: flex;
+  flex-direction: column; /* Stack name and description vertically */
+  align-items: center; /* Center align the text */
 }
 
-.artist-name {
-  font-weight: bold;
+.top-artist-artist-name {
+  font-weight: bold; /* Make artist name bold */
+  font-size: 20px; /* Larger font size for the name */
+  width: 100%; /* Ensure the name takes full width to fit in one line */
+  font-family: 'Playfair Display', serif;
 }
 
-.artist-description {
+.top-artist-artist-description {
   font-style: italic;
+  font-size: 16px; /* Slightly larger description for readability */
+  padding-top: 5px; /* Space between name and description */
+  font-family: 'Playfair Display', serif;
 }
+
 
 /* Prev and Next buttons */
-.carousel-button {
-  background-color: rgba(0, 0, 0, 0.5);
+.top-artist-carousel-button {
+  background-color: white;
   border: none;
-  color: white;
   font-size: 24px;
   cursor: pointer;
   padding: 10px;
@@ -65,14 +74,14 @@
   z-index: 2;
 }
 
-.carousel-button.prev {
+.top-artist-carousel-button.prev {
   left: 10px;
 }
 
-.carousel-button.next {
+.top-artist-carousel-button.next {
   right: 10px;
 }
 
-.carousel-button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+.top-artist-carousel-button:hover {
+  background-color: grey;
 }

@@ -17,6 +17,7 @@
   align-items: center;
   flex: 1; /* Flex-grow to evenly distribute the boxes */
   padding: 20px;
+  font-family: 'Playfair Display', serif;
 }
 
 /* Styling for the icons */

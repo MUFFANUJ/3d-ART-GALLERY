@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <div>
       <nav className='header'>
-        <div className="logo">Kalakriti</div>
+        <img src="/assets/images/mainlogo.png" alt="Kalakriti" className="logo" />
         <div className="nav-icons">
           <div className="nav-icon">
             <FaRegHeart />

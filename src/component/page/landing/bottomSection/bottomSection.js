@@ -28,6 +28,16 @@ const BottomSection = () => {
       image: 'https://www.odisha.plus/wp-content/uploads/2023/10/7ef527a6-36cf-4043-8b52-e85c0ad1f1b8.jpeg',
       name: 'Raja Ravi Verma',
       description: 'Traditional Indian art expert'
+    },
+    {
+      image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Tyeb_Mehta.jpg/280px-Tyeb_Mehta.jpg',
+      name: 'Tyeb Mehta',
+      description: 'Indian painter and sculptor.'
+    },
+    {
+      image: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Gerhard_Richter%2C_Prague_%282017%29.jpg',
+      name: 'Gerhard Ritcher',
+      description: 'German visual artist.'
     }
   ];
 
