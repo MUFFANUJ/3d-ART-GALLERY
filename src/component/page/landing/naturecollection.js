@@ -14,20 +14,20 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 const ART_PIECES = [
   {
-    title: "Beautiful Beast",
-    imgPath: "assests/images/pichwai/p1.webp",
-    price: "\u20B9 3770",
+    title: "Flowers And Fruits",
+    imgPath: "assests/images/naturepalete/n1.webp",
+    price: "\u20B9 2610",
   },
-  { title: "Stillness", imgPath: "assests/images/pichwai/p2.webp", price: "\u20B9 3770" },
-  { title: "Foxy", imgPath: "assests/images/pichwai/p3.webp", price: "\u20B9 3330" },
-  { title: "Gentle Giant", imgPath: "assests/images/pichwai/p4.webp", price: "\u20B9 3770" },
-  { title: "Purity", imgPath: "assests/images/pichwai/p5.webp", price: "\u20B9 2410" },
+  { title: "Graphic Botanical Mini", imgPath: "assests/images/naturepalete/n2.webp", price: "\u20B9 6750" },
+  { title: "Delicate Orchid", imgPath: "assests/images/naturepalete/n3.webp", price: "\u20B9 9420" },
+  { title: "Green Twig No 3", imgPath: "assests/images/naturepalete/n4.webp", price: "\u20B9 3770" },
+  { title: "Vintage Flower Chart", imgPath: "assests/images/naturepalete/n5.webp", price: "\u20B9 2410" },
   {
-    title: "Lonely Together",
-    imgPath: "assests/images/pichwai/p6.webp",
-    price: "₹ 2080",
+    title: "Leaves and Fruits",
+    imgPath: "assests/images/naturepalete/n6.webp",
+    price: "₹ 5520",
   },
-  { title: "Owl", imgPath: "assests/images/pichwai/p7.webp", price: "₹ 2410" }
+  { title: "Passion Flowers", imgPath: "assests/images/naturepalete/n7.webp", price: "₹ 2440" }
 ];
 
 const WallArt = (props) => {
@@ -382,7 +382,7 @@ const GradientBackground = () => {
   return null;
 };
 
-function Collection() {
+function NatureCollection() {
   const [cart, setCart] = useState([]);
 
   const handleAddToCart = (item) => {
@@ -449,4 +449,4 @@ function Collection() {
   );
 }
 
-export default Collection;
+export default NatureCollection;

@@ -383,7 +383,7 @@ const Rig = () => {
 
 const GradientBackground = () => {
   const { scene } = useThree();
-  scene.background = new Color("#1D2951"); // Dark grey background
+  scene.background = new Color("#000000"); // Dark grey background
   return null;
 };
 
@@ -439,7 +439,7 @@ function App() {
         <ambientLight intensity={0.5} color={0xffffff} />
         <SpotLight intensity={50} position={[8, 8, 8]} angle={Math.PI / 5} />
         <EffectComposer>
-          <Vignette eskil={false} offset={0.1} darkness={1.1} />
+          <Vignette eskil={false} offset={0.1} darkness={0.5} />
         </EffectComposer>
         <Rig />
         <Scene addToCart={handleAddToCart} />

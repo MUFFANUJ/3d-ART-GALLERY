@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  justify-content: space-between;  /* Keeps the logo and icons spaced apart */
+  justify-content: space-between;  
   align-items: center;
   margin-bottom: 0;
   height: 60px;
@@ -11,7 +11,8 @@
 .header .logo {
   font-size: 24px; 
   font-weight: bold;
-  color: white; /* Ensures logo text (if used instead of image) is visible */
+  color: white; 
+  font-family: 'Playfair Display', serif;
 }
 
 .header .nav-icons {
@@ -24,9 +25,16 @@
   display: flex;
   align-items: center;
   margin-left: 20px;
-  font-size: 20px;
+  font-size: 16px;
+  cursor: pointer; 
+  font-family: 'Playfair Display', serif;
 }
 
 .header .nav-icon span {
   margin-left: 8px;
 }
+
+.header .nav-icon:hover {
+  color: #ccc;
+}
+
