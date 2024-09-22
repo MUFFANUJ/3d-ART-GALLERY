@@ -13,6 +13,9 @@
   font-weight: bold;
   color: white; 
   font-family: 'Playfair Display', serif;
+  /* Adding left padding for better alignment */
+  /* padding-left: 10px; */
+  padding-left: 0;
 }
 
 .header .nav-icons {
@@ -38,3 +41,7 @@
   color: #ccc;
 }
 
+img.logo {
+  width: auto;
+  height: 100px;
+}

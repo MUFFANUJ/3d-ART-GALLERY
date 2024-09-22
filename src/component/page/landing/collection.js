@@ -15,6 +15,43 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 
 const ART_PIECES = {
+  nature:[
+    {
+      title: "Flowers And Fruits",
+      imgPath: "assests/images/naturepalete/n1.webp",
+      price: " 2610",
+    },
+    {
+      title: "Graphic Botanical Mini",
+      imgPath: "assests/images/naturepalete/n2.webp",
+      price: " 6750",
+    },
+    {
+      title: "Green Twig No 3",
+      imgPath: "assests/images/naturepalete/n4.webp",
+      price: " 3770",
+    },
+    {
+      title: "Flowers And Fruits",
+      imgPath: "assests/images/naturepalete/n1.webp",
+      price: " 2610",
+    },
+    {
+      title: "Graphic Botanical Mini",
+      imgPath: "assests/images/naturepalete/n2.webp",
+      price: " 6750",
+    },
+    {
+      title: "Green Twig No 3",
+      imgPath: "assests/images/naturepalete/n4.webp",
+      price: " 3770",
+    },
+    {
+      title: "Flowers And Fruits",
+      imgPath: "assests/images/naturepalete/n1.webp",
+      price: " 2610",
+    },
+  ],
   pichwai: [
     {
       title: "Beautiful Beast",
@@ -53,6 +90,7 @@ const ART_PIECES = {
     },
   ],
 };
+
 const WallArt = ({ art, i, addToCart }) => {
   const { width: w, height: h } = useThree((state) => state.viewport);
   const gap = 2;
@@ -173,17 +211,16 @@ const Scene = ({ addToCart, selectedArtPieces }) => {
         distance={1}
       >
         <Scroll>
-          <Text
+        <Text
             position-z={0}
             anchorX="center"
             anchorY="bottom"
             scale={[textScale, textScale, textScale]}
-            color="black"
-            fontWeight="bold"
+            color="#FFFFFF"
             font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
             castShadow
           >
-            Pichwai art vividly captures the divine narratives of
+            Creativity is allowing yourself to make mistakes.
           </Text>
           <Text
             position-z={1}
@@ -192,10 +229,9 @@ const Scene = ({ addToCart, selectedArtPieces }) => {
             scale={[textScale, textScale, textScale]}
             color="#FBA90A"
             font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
-            padding="5px"
             castShadow
           >
-            Lord Krishna with intricate detail and vibrant devotion.
+            Art is knowing which ones to keep.
           </Text>
           {/* <Text
             position={[0, -0.5, 1.5]}

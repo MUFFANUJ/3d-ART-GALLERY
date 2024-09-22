@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <div>
       <nav className='header'>
-        <img src="/assets/images/mainlogo.png" alt="Kalakriti" className="logo" />
+        <img src="/assests/images/mainlogo.png" alt="Kalakriti" className="logo" />
         <div className="nav-icons">
           <div className="nav-icon" onClick={handleFavouriteClick}>
             <FaRegHeart />
