@@ -14,7 +14,7 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 
 const ART_PIECES = {
-  pichwai:[
+  nature:[
     {
       title: "Beautiful Beast",
       imgPath: "assests/images/pichwai/p1.webp",

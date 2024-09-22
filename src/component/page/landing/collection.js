@@ -163,35 +163,36 @@ const Scene = ({ addToCart, selectedArtPieces }) => {
       >
         <Scroll>
           <Text
-            position-z={0}
+            position-z={1}
             anchorX="center"
-            anchorY="bottom"
+            anchorY="top"
             scale={[textScale, textScale, textScale]}
-            color="#94A6FF"
+            color="black"
             font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
             castShadow
           >
-            Creativity is allowing yourself to make mistakes.
+            Pichwai art embodies Lord Krishna's tales with vibrant intricacy.
           </Text>
-          <Text
+          {/* <Text
             position-z={1}
             anchorX="center"
             anchorY="top"
             scale={[textScale, textScale, textScale]}
             color="#FBA90A"
             font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
+            padding="5px"
             castShadow
           >
-            Art is knowing which ones to keep.
-          </Text>
-          <Text
+            Lord Krishna with intricate detail and vibrant devotion.
+          </Text> */}
+          {/* <Text
             position={[0, -0.5, 1.5]}
             anchorX="center"
             anchorY="top"
             font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
           >
             ~ Scott Adams
-          </Text>
+          </Text> */}
 
           {selectedArtPieces.map((art, i) => (
             <WallArt key={i} i={i} art={art} addToCart={addToCart} />
@@ -266,9 +267,14 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
             <button
               style={{
                 cursor: "pointer",
-                background: "none",
-                border: "none",
+                background: "#008081",
+                borderRadius: "20px",
+                borderWidth: "10px",
+                borderStyle: "solid",
+                borderColor: "white",
                 fontSize: "20px",
+                color: "white",
+                padding: "2px 10px",
               }}
               onClick={() => setIsOpen(false)}
             >
@@ -320,7 +326,7 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
                           padding: "5px 10px",
                           fontSize: "16px",
                           borderRadius: "5px",
-                          backgroundColor: "#f5f5f5",
+                          backgroundColor: "#008081",
                           border: "1px solid #ccc",
                           cursor: "pointer",
                           marginRight: "10px",
@@ -335,7 +341,7 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
                           padding: "5px 10px",
                           fontSize: "16px",
                           borderRadius: "5px",
-                          backgroundColor: "#f5f5f5",
+                          backgroundColor: "#008081",
                           border: "1px solid #ccc",
                           cursor: "pointer",
                           marginRight: "10px",
@@ -351,7 +357,7 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
                         padding: "5px 10px",
                         fontSize: "14px",
                         borderRadius: "5px",
-                        backgroundColor: "#FF6666",
+                        backgroundColor: "#008081",
                         border: "none",
                         color: "white",
                         cursor: "pointer",

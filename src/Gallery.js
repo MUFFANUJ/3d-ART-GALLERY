@@ -16,146 +16,46 @@ const ART_PIECES = [
   {
     title: "Flowers And Fruits",
     imgPath: "assests/images/naturepalete/n1.webp",
-    price: "\u20B9 2610",
+    price: " 2610",
   },
   {
     title: "Graphic Botanical Mini",
     imgPath: "assests/images/naturepalete/n2.webp",
-    price: "\u20B9 6750",
+    price: " 6750",
   },
   {
     title: "Green Twig No 3",
     imgPath: "assests/images/naturepalete/n4.webp",
-    price: "\u20B9 3770",
+    price: " 3770",
   },
   {
     title: "Beautiful Beast",
     imgPath: "assests/images/pichwai/p1.webp",
-    price: "\u20B9 3770",
+    price: " 3770",
   },
-  { title: "Stillness", imgPath: "assests/images/pichwai/p2.webp", price: "\u20B9 3770" },
-  { title: "Foxy", imgPath: "assests/images/pichwai/p3.webp", price: "\u20B9 3330" },
-  { title: "Gentle Giant", imgPath: "assests/images/pichwai/p4.webp", price: "\u20B9 3770" },
-  { title: "Purity", imgPath: "assests/images/pichwai/p5.webp", price: "\u20B9 2410" },
+  {
+    title: "Stillness",
+    imgPath: "assests/images/pichwai/p2.webp",
+    price: " 3770",
+  },
+  { title: "Foxy", imgPath: "assests/images/pichwai/p3.webp", price: " 3330" },
+  {
+    title: "Gentle Giant",
+    imgPath: "assests/images/pichwai/p4.webp",
+    price: " 3770",
+  },
+  {
+    title: "Purity",
+    imgPath: "assests/images/pichwai/p5.webp",
+    price: " 2410",
+  },
   {
     title: "Lonely Together",
     imgPath: "assests/images/pichwai/p6.webp",
     price: "₹ 2080",
   },
-  { title: "Owl", imgPath: "assests/images/pichwai/p7.webp", price: "₹ 2410" }
-
+  { title: "Owl", imgPath: "assests/images/pichwai/p7.webp", price: " 2410" },
 ];
-
-// const WallArt = (props) => {
-//   const { art, i, addToCart } = props;
-//   const { width: w, height: h } = useThree((state) => state.viewport);
-//   const gap = 2; // Horizontal gap between images
-//   const imageWidth = 3;
-//   const texture = useLoader(TextureLoader, art.imgPath);
-
-//   // Calculate positions dynamically based on index `i`
-//   const xPosition = (i + 1) * (imageWidth + gap) + (i + 1);
-//   const yPositionImage = 0; // Base level for the image
-//   const yPositionTitle = yPositionImage + 2.5; // Move the title above the image
-//   const yPositionPrice = yPositionImage - 2.5; // Price below the image
-//   const yPositionButton = yPositionPrice - 0.8; // Button below the price
-
-//   const handleAddToCart = (e) => {
-//     e.stopPropagation(); // Stop event propagation to avoid bubbling issues
-//     console.log(`Adding ${art.title} to cart`);
-//     addToCart(art);
-//   };
-
-//   return (
-//     <group>
-//       <SpotLight
-//         position={[xPosition - w / 4, 2.5, 1]}
-//         penumbra={1}
-//         angle={0.6}
-//         attenuation={1}
-//         anglePower={5}
-//         intensity={10}
-//         distance={10}
-//         castShadow
-//         color={0xffffff}
-//       />
-
-//       <mesh
-//         castShadow
-//         position={[(i + 1) * (imageWidth + gap) + (i + 1), 0, 0]}
-//       >
-//         <boxBufferGeometry attach="geometry" args={[imageWidth, h / 2, 0.07]} />
-//         <meshStandardMaterial
-//           attach="material"
-//           map={texture}
-//           roughness={0.2}
-//           metalness={0.8}
-//         />
-//       </mesh>
-
-//       {/* Title above the artwork */}
-//       <mesh position={[xPosition, yPositionTitle, 0]}>
-//         <planeGeometry args={[1.25, 0.5]} />
-//         <meshStandardMaterial color={0xfaebd7} />
-//         <Text
-//           position-z={0}
-//           scale={[2, 2, 2]}
-//           color="black"
-//           anchorX="center"
-//           anchorY="middle"
-//           font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
-//         >
-//           {art.title}
-//         </Text>
-//       </mesh>
-
-//       {/* Artwork Image */}
-//       <mesh castShadow position={[xPosition, yPositionImage, 0]}>
-//         <boxBufferGeometry attach="geometry" args={[imageWidth, h / 2, 0.07]} />
-//         <meshStandardMaterial
-//           attach="material"
-//           map={texture}
-//           roughness={0.2}
-//           metalness={0.8}
-//           color={0xfaebd7}
-//         />
-//       </mesh>
-
-//       {/* Price below the artwork */}
-//       <Text
-//         position={[xPosition, yPositionPrice, 0]}
-//         scale={[2, 2, 2]}
-//         color="black"
-//         anchorX="center"
-//         anchorY="middle"
-//         font="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap"
-//       >
-//         {`$${art.price}`}
-//       </Text>
-
-//       {/* Add to Cart Button below the price */}
-//       <mesh
-//         position={[xPosition, yPositionButton, 0]}
-//         onClick={handleAddToCart}
-//         onPointerOver={(e) => e.stopPropagation()}
-//         onPointerDown={(e) => e.stopPropagation()}
-//       >
-//         <planeGeometry args={[1.4, 0.6]} />
-//         <meshStandardMaterial color={0x1e90ff} />
-//         <Text
-//           position-z={0.1}
-//           scale={[2.2, 2.2, 2.2]}
-//           color="white"
-//           anchorX="center"
-//           anchorY="middle"
-//           font="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
-//         >
-//           Add to Cart
-//         </Text>
-//       </mesh>
-//     </group>
-//   );
-// };
 
 const WallArt = (props) => {
   console.log("this is props in wallArt -> ", props);
@@ -212,7 +112,7 @@ const WallArt = (props) => {
       <Text
         position={[xPosition, yPositionTitle, 0]}
         scale={[2, 2, 2]}
-        color="black"
+        color="white"
         anchorX="center"
         anchorY="middle"
         font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
@@ -223,7 +123,7 @@ const WallArt = (props) => {
       <Text
         position={[xPosition, yPositionPrice, 0]}
         scale={[2, 2, 2]}
-        color="black"
+        color="white"
         anchorX="center"
         anchorY="middle"
         font="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap"
@@ -364,7 +264,7 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
             position: "absolute",
             top: 60,
             right: 20,
-            backgroundColor: "#fff",
+            backgroundColor: "white",
             padding: "20px",
             borderRadius: "10px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -396,9 +296,14 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
             <button
               style={{
                 cursor: "pointer",
-                background: "none",
-                border: "none",
+                background: "black",
+                borderRadius: "20px",
+                borderWidth: "10px",
+                borderStyle: "solid",
+                borderColor: "white",
                 fontSize: "20px",
+                color: "white",
+                padding: "2px 10px",
               }}
               onClick={() => setIsOpen(false)}
             >
@@ -450,7 +355,7 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
                           padding: "5px 10px",
                           fontSize: "16px",
                           borderRadius: "5px",
-                          backgroundColor: "#f5f5f5",
+                          backgroundColor: "black",
                           border: "1px solid #ccc",
                           cursor: "pointer",
                           marginRight: "10px",
@@ -465,7 +370,7 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
                           padding: "5px 10px",
                           fontSize: "16px",
                           borderRadius: "5px",
-                          backgroundColor: "#f5f5f5",
+                          backgroundColor: "black",
                           border: "1px solid #ccc",
                           cursor: "pointer",
                           marginRight: "10px",
@@ -481,7 +386,7 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
                         padding: "5px 10px",
                         fontSize: "14px",
                         borderRadius: "5px",
-                        backgroundColor: "#FF6666",
+                        backgroundColor: "black",
                         border: "none",
                         color: "white",
                         cursor: "pointer",
