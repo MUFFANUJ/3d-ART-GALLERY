@@ -113,7 +113,7 @@ const WallArt = (props) => {
         font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
         maxWidth={imageWidth} // Ensure text does not exceed the image width
       >
-        {art.title}   -   {`$${art.price}`}
+        {art.title}   - {`$${art.price}`}
       </Text>
       <mesh
         position={[xPosition, yPositionButton, 0]}

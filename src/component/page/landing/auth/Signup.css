@@ -1,9 +1,9 @@
-.signup-container {
+/* .signup-container {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #f0f0f0; /* Greyish white */
+  background-color: #f0f0f0; 
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
@@ -23,7 +23,7 @@
 
 h1 {
   margin-bottom: 20px;
-  color: #000000; /* Dark Green */
+  color: #000000; 
 }
 
 input[type="email"],
@@ -40,7 +40,7 @@ input[type="password"] {
 button {
   width: 100%;
   padding: 12px;
-  background-color: #51ec0e; /* Brighter Green */
+  background-color: #51ec0e; 
   border: none;
   border-radius: 5px;
   color: rgb(0, 0, 0);
@@ -52,7 +52,7 @@ button {
 }
 
 button:hover {
-  background-color: #7bffb6; /* Darker shade for hover */
+  background-color: #7bffb6;
   opacity: 0.9;
 }
 label{
@@ -72,16 +72,14 @@ label{
   z-index: 1000;
 }
 
-/* Update the button styles for Google Sign-In */
 button.google-signin-btn {
-  background-color: #fefeff; /* Google's official blue color */
+  background-color: #fefeff; 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px; /* Space between icon and text */
+  gap: 10px; 
 }
 
-/* Add Google icon */
 button.google-signin-btn::before {
   content: url('https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg');
   width: 18px;
@@ -89,5 +87,5 @@ button.google-signin-btn::before {
 }
 
 button.google-signin-btn:hover {
-  background-color: #357ae8; /* Slightly darker blue on hover */
-}
+  background-color: #357ae8; 
+} */
