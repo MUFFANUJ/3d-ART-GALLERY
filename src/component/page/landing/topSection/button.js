@@ -1,23 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import './button.css';
 
-const Button = () => {
-  const navigate = useNavigate();
-
-  const handleButtonClick = () => {
-    navigate('/gallery');
-  };
-
+const Button = ({ onShowLogin }) => {
   return (
     <div className="button-container">
-      <button className="button" onClick={handleButtonClick}>
-        EXPLORE COLLECTION
+      <button className="button" onClick={onShowLogin}>
+        EXPLORE ART PIECES
       </button>
     </div>
   );
 };
 
 export default Button;
-
-

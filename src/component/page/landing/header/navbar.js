@@ -22,7 +22,7 @@ const Navbar = () => {
           </div>
           <div className="nav-icon">
             <CgProfile />
-            <span>Profile</span>
+            <span>Sign in</span>
           </div>
           <div className="nav-icon">
             <IoCartOutline />
