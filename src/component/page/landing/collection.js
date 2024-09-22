@@ -1,11 +1,12 @@
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
-import React, { Suspense, useState} from "react";
+import React, { Suspense, useState } from "react";
 import {
   SpotLight,
   Text,
   ScrollControls,
   Scroll,
   Html,
+  RoundedBox,
 } from "@react-three/drei";
 import { EffectComposer, Vignette } from "@react-three/postprocessing";
 import { TextureLoader, Vector3, Color } from "three";
@@ -14,43 +15,58 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 
 const ART_PIECES = {
-  pichwai:[
+  pichwai: [
     {
       title: "Beautiful Beast",
       imgPath: "assests/images/pichwai/p1.webp",
       price: "\u20B9 3770",
     },
-    { title: "Stillness", imgPath: "assests/images/pichwai/p2.webp", price: "\u20B9 3770" },
-    { title: "Foxy", imgPath: "assests/images/pichwai/p3.webp", price: "\u20B9 3330" },
-    { title: "Gentle Giant", imgPath: "assests/images/pichwai/p4.webp", price: "\u20B9 3770" },
-    { title: "Purity", imgPath: "assests/images/pichwai/p5.webp", price: "\u20B9 2410" },
+    {
+      title: "Stillness",
+      imgPath: "assests/images/pichwai/p2.webp",
+      price: "\u20B9 3770",
+    },
+    {
+      title: "Foxy",
+      imgPath: "assests/images/pichwai/p3.webp",
+      price: "\u20B9 3330",
+    },
+    {
+      title: "Gentle Giant",
+      imgPath: "assests/images/pichwai/p4.webp",
+      price: "\u20B9 3770",
+    },
+    {
+      title: "Purity",
+      imgPath: "assests/images/pichwai/p5.webp",
+      price: "\u20B9 2410",
+    },
     {
       title: "Lonely Together",
       imgPath: "assests/images/pichwai/p6.webp",
       price: "₹ 2080",
     },
-    { title: "Owl", imgPath: "assests/images/pichwai/p7.webp", price: "₹ 2410" },
-  ]
-}
-;
-
-const WallArt = (props) => {
-  const { art, i, addToCart } = props;
+    {
+      title: "Owl",
+      imgPath: "assests/images/pichwai/p7.webp",
+      price: "₹ 2410",
+    },
+  ],
+};
+const WallArt = ({ art, i, addToCart }) => {
   const { width: w, height: h } = useThree((state) => state.viewport);
-  const gap = 2; 
+  const gap = 2;
   const imageWidth = 3;
-  const imageHeight = h / 2; 
+  const imageHeight = h / 2;
   const texture = useLoader(TextureLoader, art.imgPath);
 
   const xPosition = (i + 1) * (imageWidth + gap) + (i + 1);
-  const baseYPosition = 0; 
-  const yPositionTitle = baseYPosition - imageHeight / 2 - 0.5; 
-  const yPositionPrice = yPositionTitle - 0.6; 
-  const yPositionButton = yPositionPrice - 1.0; 
-  const yPositionDescription = yPositionButton - 1.5; 
+  const baseYPosition = 0; // Center y position of the image
+  const titleAndPriceYPosition = baseYPosition + imageHeight / 2 + 0.5; // Above the image
+  const yPositionButton = baseYPosition - imageHeight / 2 - 0.5; // Below the image
 
   const handleAddToCart = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     console.log(`Adding ${art.title} to cart`);
     addToCart(art);
   };
@@ -81,28 +97,29 @@ const WallArt = (props) => {
           metalness={0.8}
         />
       </mesh>
-
       <Text
-        position={[xPosition, yPositionTitle, 0]}
-        scale={[2, 2, 2]}
-        color="black"
+        position={[xPosition, titleAndPriceYPosition, 0]}
+        scale={[1.8, 1.8, 1.8]} // Slightly larger font scale
+        color="white"
         anchorX="center"
         anchorY="middle"
         font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
+        maxWidth={imageWidth} // Ensure text does not exceed the image width
       >
-        {art.title}
+        {art.title}  -   {`$${art.price}`}
       </Text>
 
-      <Text
-        position={[xPosition, yPositionPrice, 0]}
-        scale={[2, 2, 2]}
+      {/* <Text
+        position={[xPosition, titleAndPriceYPosition - 0.5, 0]} // Slightly lower position to reduce vertical distance
+        scale={[1.6, 1.6, 1.6]} // Uniform font scale with title
         color="black"
-        anchorX="center"
+        anchorX="center" // Adjust to 'center' for consistent alignment with the title
         anchorY="middle"
         font="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap"
+        maxWidth={imageWidth} // Same as title to keep within image bounds
       >
         {`$${art.price}`}
-      </Text>
+      </Text> */}
 
       <mesh
         position={[xPosition, yPositionButton, 0]}
@@ -110,11 +127,16 @@ const WallArt = (props) => {
         onPointerOver={(e) => e.stopPropagation()}
         onPointerDown={(e) => e.stopPropagation()}
       >
-        <planeGeometry args={[1.4, 0.6]} />
-        <meshStandardMaterial color={0x1e90ff} />
+        <RoundedBox // Using RoundedBox for rounded corners
+          args={[1.2, 0.4, 0.1]} // width, height, depth
+          radius={0.05} // The border radius
+          smoothness={16} // Higher smoothness for smoother corners
+        >
+          <meshStandardMaterial color={0x000000} />
+        </RoundedBox>
         <Text
           position-z={0.1}
-          scale={[2.2, 2.2, 2.2]}
+          scale={[1.6, 1.6, 1.6]} // Increased scale for larger font
           color="white"
           anchorX="center"
           anchorY="middle"
@@ -123,17 +145,6 @@ const WallArt = (props) => {
           Add to Cart
         </Text>
       </mesh>
-
-      <Text
-        position={[xPosition, yPositionDescription, 0]}
-        scale={[1.5, 1.5, 1.5]}
-        color="grey"
-        anchorX="center"
-        anchorY="middle"
-        font="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
-      >
-        "A brief description of the art piece here over two lines."
-      </Text>
     </group>
   );
 };
@@ -163,17 +174,18 @@ const Scene = ({ addToCart, selectedArtPieces }) => {
       >
         <Scroll>
           <Text
-            position-z={1}
+            position-z={0}
             anchorX="center"
-            anchorY="top"
+            anchorY="bottom"
             scale={[textScale, textScale, textScale]}
             color="black"
+            fontWeight="bold"
             font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
             castShadow
           >
-            Pichwai art embodies Lord Krishna's tales with vibrant intricacy.
+            Pichwai art vividly captures the divine narratives of
           </Text>
-          {/* <Text
+          <Text
             position-z={1}
             anchorX="center"
             anchorY="top"
@@ -184,7 +196,7 @@ const Scene = ({ addToCart, selectedArtPieces }) => {
             castShadow
           >
             Lord Krishna with intricate detail and vibrant devotion.
-          </Text> */}
+          </Text>
           {/* <Text
             position={[0, -0.5, 1.5]}
             anchorX="center"
@@ -395,9 +407,9 @@ const GradientBackground = () => {
 };
 
 function Collection() {
-  const {category} = useParams();
+  const { category } = useParams();
   const selectedArtPieces = ART_PIECES[category] || [];
-  console.log("this is my category -> ",category);
+  console.log("this is my category -> ", category);
   // category?:(data[0].category.map(()=>{
 
   // })):()
@@ -455,7 +467,10 @@ function Collection() {
           <Vignette eskil={false} offset={0.1} darkness={1.1} />
         </EffectComposer>
         <Rig />
-        <Scene addToCart={handleAddToCart} selectedArtPieces={selectedArtPieces}/>
+        <Scene
+          addToCart={handleAddToCart}
+          selectedArtPieces={selectedArtPieces}
+        />
       </Canvas>
       <Cart
         cart={cart}

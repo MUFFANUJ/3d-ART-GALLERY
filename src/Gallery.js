@@ -6,6 +6,7 @@ import {
   ScrollControls,
   Scroll,
   Html,
+  RoundedBox,
 } from "@react-three/drei";
 import { EffectComposer, Vignette } from "@react-three/postprocessing";
 import { TextureLoader, Vector3, Color } from "three";
@@ -66,15 +67,10 @@ const WallArt = (props) => {
   const imageHeight = h / 2; // Adjusted to a variable for clarity and reusability
   const texture = useLoader(TextureLoader, art.imgPath);
 
-  // Calculate positions dynamically based on index `i`
   const xPosition = (i + 1) * (imageWidth + gap) + (i + 1);
-  const baseYPosition = 0; // Base level for the image
-
-  // Adjust positions for title, price, and add to cart button
-  const yPositionTitle = baseYPosition - imageHeight / 2 - 0.5; // Title at the bottom of the image
-  const yPositionPrice = yPositionTitle - 0.6; // Price below the title
-  const yPositionButton = yPositionPrice - 1.0; // Button below the price
-  const yPositionDescription = yPositionButton - 1.5; // Description below the button
+  const baseYPosition = 0; // Center y position of the image
+  const titleAndPriceYPosition = baseYPosition + imageHeight / 2 + 0.5; // Above the image
+  const yPositionButton = baseYPosition - imageHeight / 2 - 0.5; // Below the image
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
@@ -108,41 +104,34 @@ const WallArt = (props) => {
           metalness={0.8}
         />
       </mesh>
-
       <Text
-        position={[xPosition, yPositionTitle, 0]}
-        scale={[2, 2, 2]}
+        position={[xPosition, titleAndPriceYPosition, 0]}
+        scale={[1.8, 1.8, 1.8]} // Slightly larger font scale
         color="white"
         anchorX="center"
         anchorY="middle"
         font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
+        maxWidth={imageWidth} // Ensure text does not exceed the image width
       >
-        {art.title}
+        {art.title}   -   {`$${art.price}`}
       </Text>
-
-      <Text
-        position={[xPosition, yPositionPrice, 0]}
-        scale={[2, 2, 2]}
-        color="white"
-        anchorX="center"
-        anchorY="middle"
-        font="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap"
-      >
-        {`$${art.price}`}
-      </Text>
-
       <mesh
         position={[xPosition, yPositionButton, 0]}
         onClick={handleAddToCart}
         onPointerOver={(e) => e.stopPropagation()}
         onPointerDown={(e) => e.stopPropagation()}
       >
-        <planeGeometry args={[1.4, 0.6]} />
-        <meshStandardMaterial color={0x1e90ff} />
+        <RoundedBox // Using RoundedBox for rounded corners
+          args={[1.2, 0.4, 0.1]} // width, height, depth
+          radius={0.05} // The border radius
+          smoothness={16} // Higher smoothness for smoother corners
+        >
+          <meshStandardMaterial color={0xFFFFFF} />
+        </RoundedBox>
         <Text
           position-z={0.1}
-          scale={[2.2, 2.2, 2.2]}
-          color="white"
+          scale={[1.6, 1.6, 1.6]} // Increased scale for larger font
+          color="black"
           anchorX="center"
           anchorY="middle"
           font="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
@@ -151,7 +140,7 @@ const WallArt = (props) => {
         </Text>
       </mesh>
 
-      <Text
+      {/* <Text
         position={[xPosition, yPositionDescription, 0]}
         scale={[1.5, 1.5, 1.5]}
         color="grey"
@@ -160,7 +149,7 @@ const WallArt = (props) => {
         font="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
       >
         "A brief description of the art piece here over two lines."
-      </Text>
+      </Text> */}
     </group>
   );
 };
