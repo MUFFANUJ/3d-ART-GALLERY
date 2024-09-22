@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<LandingPage/>} />
         <Route path="/gallery" element={<Gallery/>} />
         <Route path="/collection/:category" element={<Collection />} />
-        <Route path="/nature" element={<NatureCollection />} />
+        <Route path="/collection/:category" element={<NatureCollection />} />
       </Routes>
     </Router>
   );

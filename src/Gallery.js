@@ -14,50 +14,176 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 const ART_PIECES = [
   {
-    title: "Beautiful Beast",
-    imgPath: "assests/images/beauty_and_beast.jpeg",
-    price: "\u20B9 400",
+    title: "Flowers And Fruits",
+    imgPath: "assests/images/naturepalete/n1.webp",
+    price: "\u20B9 2610",
   },
-  { title: "Stillness", imgPath: "assests/images/foxy.jpeg", price: "\u20B9 400" },
-  { title: "Foxy", imgPath: "assests/images/foxy.jpeg", price: "\u20B9 400" },
-  { title: "Gentle Giant", imgPath: "assests/images/horse_sketch.jpeg", price: "\u20B9 400" },
-  { title: "Purity", imgPath: "assests/images/kindness.jpeg", price: "\u20B9 400" },
+  {
+    title: "Graphic Botanical Mini",
+    imgPath: "assests/images/naturepalete/n2.webp",
+    price: "\u20B9 6750",
+  },
+  {
+    title: "Green Twig No 3",
+    imgPath: "assests/images/naturepalete/n4.webp",
+    price: "\u20B9 3770",
+  },
+  {
+    title: "Beautiful Beast",
+    imgPath: "assests/images/pichwai/p1.webp",
+    price: "\u20B9 3770",
+  },
+  { title: "Stillness", imgPath: "assests/images/pichwai/p2.webp", price: "\u20B9 3770" },
+  { title: "Foxy", imgPath: "assests/images/pichwai/p3.webp", price: "\u20B9 3330" },
+  { title: "Gentle Giant", imgPath: "assests/images/pichwai/p4.webp", price: "\u20B9 3770" },
+  { title: "Purity", imgPath: "assests/images/pichwai/p5.webp", price: "\u20B9 2410" },
   {
     title: "Lonely Together",
-    imgPath: "assests/images/lonely_together.jpeg",
-    price: "₹ 400",
+    imgPath: "assests/images/pichwai/p6.webp",
+    price: "₹ 2080",
   },
-  { title: "Owl", imgPath: "assests/images/owl.jpeg", price: "₹ 400" },
-  { title: "Menace", imgPath: "assests/images/panther.jpeg", price: "\u20B9 400" },
-  { title: "Paradise", imgPath: "assests/images/paradise.jpeg", price: "₹ 400" },
-  { title: "Friendship", imgPath: "assests/images/sprited_away.jpeg", price: "₹ 400" },
-  { title: "Wanderlust", imgPath: "assests/images/wonder.jpeg", price: "₹ 400" },
-  { title: "Serenity", imgPath: "assests/images/forest.jpeg", price: "₹ 400" },
+  { title: "Owl", imgPath: "assests/images/pichwai/p7.webp", price: "₹ 2410" }
+
 ];
 
+// const WallArt = (props) => {
+//   const { art, i, addToCart } = props;
+//   const { width: w, height: h } = useThree((state) => state.viewport);
+//   const gap = 2; // Horizontal gap between images
+//   const imageWidth = 3;
+//   const texture = useLoader(TextureLoader, art.imgPath);
+
+//   // Calculate positions dynamically based on index `i`
+//   const xPosition = (i + 1) * (imageWidth + gap) + (i + 1);
+//   const yPositionImage = 0; // Base level for the image
+//   const yPositionTitle = yPositionImage + 2.5; // Move the title above the image
+//   const yPositionPrice = yPositionImage - 2.5; // Price below the image
+//   const yPositionButton = yPositionPrice - 0.8; // Button below the price
+
+//   const handleAddToCart = (e) => {
+//     e.stopPropagation(); // Stop event propagation to avoid bubbling issues
+//     console.log(`Adding ${art.title} to cart`);
+//     addToCart(art);
+//   };
+
+//   return (
+//     <group>
+//       <SpotLight
+//         position={[xPosition - w / 4, 2.5, 1]}
+//         penumbra={1}
+//         angle={0.6}
+//         attenuation={1}
+//         anglePower={5}
+//         intensity={10}
+//         distance={10}
+//         castShadow
+//         color={0xffffff}
+//       />
+
+//       <mesh
+//         castShadow
+//         position={[(i + 1) * (imageWidth + gap) + (i + 1), 0, 0]}
+//       >
+//         <boxBufferGeometry attach="geometry" args={[imageWidth, h / 2, 0.07]} />
+//         <meshStandardMaterial
+//           attach="material"
+//           map={texture}
+//           roughness={0.2}
+//           metalness={0.8}
+//         />
+//       </mesh>
+
+//       {/* Title above the artwork */}
+//       <mesh position={[xPosition, yPositionTitle, 0]}>
+//         <planeGeometry args={[1.25, 0.5]} />
+//         <meshStandardMaterial color={0xfaebd7} />
+//         <Text
+//           position-z={0}
+//           scale={[2, 2, 2]}
+//           color="black"
+//           anchorX="center"
+//           anchorY="middle"
+//           font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
+//         >
+//           {art.title}
+//         </Text>
+//       </mesh>
+
+//       {/* Artwork Image */}
+//       <mesh castShadow position={[xPosition, yPositionImage, 0]}>
+//         <boxBufferGeometry attach="geometry" args={[imageWidth, h / 2, 0.07]} />
+//         <meshStandardMaterial
+//           attach="material"
+//           map={texture}
+//           roughness={0.2}
+//           metalness={0.8}
+//           color={0xfaebd7}
+//         />
+//       </mesh>
+
+//       {/* Price below the artwork */}
+//       <Text
+//         position={[xPosition, yPositionPrice, 0]}
+//         scale={[2, 2, 2]}
+//         color="black"
+//         anchorX="center"
+//         anchorY="middle"
+//         font="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap"
+//       >
+//         {`$${art.price}`}
+//       </Text>
+
+//       {/* Add to Cart Button below the price */}
+//       <mesh
+//         position={[xPosition, yPositionButton, 0]}
+//         onClick={handleAddToCart}
+//         onPointerOver={(e) => e.stopPropagation()}
+//         onPointerDown={(e) => e.stopPropagation()}
+//       >
+//         <planeGeometry args={[1.4, 0.6]} />
+//         <meshStandardMaterial color={0x1e90ff} />
+//         <Text
+//           position-z={0.1}
+//           scale={[2.2, 2.2, 2.2]}
+//           color="white"
+//           anchorX="center"
+//           anchorY="middle"
+//           font="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
+//         >
+//           Add to Cart
+//         </Text>
+//       </mesh>
+//     </group>
+//   );
+// };
+
 const WallArt = (props) => {
+  console.log("this is props in wallArt -> ", props);
   const { art, i, addToCart } = props;
   const { width: w, height: h } = useThree((state) => state.viewport);
   const gap = 2; // Horizontal gap between images
   const imageWidth = 3;
+  const imageHeight = h / 2; // Adjusted to a variable for clarity and reusability
   const texture = useLoader(TextureLoader, art.imgPath);
 
   // Calculate positions dynamically based on index `i`
   const xPosition = (i + 1) * (imageWidth + gap) + (i + 1);
-  const yPositionImage = 0; // Base level for the image
-  const yPositionTitle = yPositionImage + 2.5; // Move the title above the image
-  const yPositionPrice = yPositionImage - 2.5; // Price below the image
-  const yPositionButton = yPositionPrice - 0.8; // Button below the price
+  const baseYPosition = 0; // Base level for the image
+
+  // Adjust positions for title, price, and add to cart button
+  const yPositionTitle = baseYPosition - imageHeight / 2 - 0.5; // Title at the bottom of the image
+  const yPositionPrice = yPositionTitle - 0.6; // Price below the title
+  const yPositionButton = yPositionPrice - 1.0; // Button below the price
+  const yPositionDescription = yPositionButton - 1.5; // Description below the button
 
   const handleAddToCart = (e) => {
-    e.stopPropagation(); // Stop event propagation to avoid bubbling issues
+    e.stopPropagation();
     console.log(`Adding ${art.title} to cart`);
     addToCart(art);
   };
 
   return (
     <group>
-      {/* Spotlight for the image */}
       <SpotLight
         position={[xPosition - w / 4, 2.5, 1]}
         penumbra={1}
@@ -70,72 +196,77 @@ const WallArt = (props) => {
         color={0xffffff}
       />
 
-      {/* Title above the artwork */}
-      <mesh position={[xPosition, yPositionTitle, 0]}>
-        <planeGeometry args={[1.25, 0.5]} />
-        <meshStandardMaterial color={0xfaebd7} />
-        <Text
-          position-z={0}
-          scale={[2, 2, 2]}
-          color="black"
-          anchorX="center"
-          anchorY="middle"
-          font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
-        >
-          {art.title}
-        </Text>
-      </mesh>
-
-      {/* Artwork Image */}
-      <mesh castShadow position={[xPosition, yPositionImage, 0]}>
-        <boxBufferGeometry attach="geometry" args={[imageWidth, h / 2, 0.07]} />
+      <mesh castShadow position={[xPosition, baseYPosition, 0]}>
+        <boxBufferGeometry
+          attach="geometry"
+          args={[imageWidth, imageHeight, 0.07]}
+        />
         <meshStandardMaterial
           attach="material"
           map={texture}
           roughness={0.2}
           metalness={0.8}
-          color={0xfaebd7}
         />
       </mesh>
 
-      {/* Price below the artwork */}
-          <Text
-    position={[xPosition, yPositionPrice, 0]}
-    scale={[2, 2, 2]}
-            color="black"
-            anchorX="center"
-            anchorY="middle"
-            font="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap"
-          >
-    {`$${art.price}`}
-          </Text>
+      <Text
+        position={[xPosition, yPositionTitle, 0]}
+        scale={[2, 2, 2]}
+        color="black"
+        anchorX="center"
+        anchorY="middle"
+        font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
+      >
+        {art.title}
+      </Text>
 
-      {/* Add to Cart Button below the price */}
+      <Text
+        position={[xPosition, yPositionPrice, 0]}
+        scale={[2, 2, 2]}
+        color="black"
+        anchorX="center"
+        anchorY="middle"
+        font="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap"
+      >
+        {`$${art.price}`}
+      </Text>
+
       <mesh
-    position={[xPosition, yPositionButton, 0]}
-    onClick={handleAddToCart}
-    onPointerOver={(e) => e.stopPropagation()}
-    onPointerDown={(e) => e.stopPropagation()}
+        position={[xPosition, yPositionButton, 0]}
+        onClick={handleAddToCart}
+        onPointerOver={(e) => e.stopPropagation()}
+        onPointerDown={(e) => e.stopPropagation()}
       >
         <planeGeometry args={[1.4, 0.6]} />
-    <meshStandardMaterial color={0x1e90ff} />
+        <meshStandardMaterial color={0x1e90ff} />
         <Text
-      position-z={0.1}
-      scale={[2.2, 2.2, 2.2]}
-      color="white"
+          position-z={0.1}
+          scale={[2.2, 2.2, 2.2]}
+          color="white"
           anchorX="center"
           anchorY="middle"
-      font="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
+          font="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
         >
           Add to Cart
         </Text>
       </mesh>
 
+      <Text
+        position={[xPosition, yPositionDescription, 0]}
+        scale={[1.5, 1.5, 1.5]}
+        color="grey"
+        anchorX="center"
+        anchorY="middle"
+        font="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"
+      >
+        "A brief description of the art piece here over two lines."
+      </Text>
     </group>
   );
 };
 
 const Scene = ({ addToCart }) => {
+  console.log("this is add to cart in -> ", addToCart);
   const { width: screenWidth } = useThree((state) => state.viewport);
   console.log("screenWidth", screenWidth);
   const textScale = screenWidth < 5.5 ? 2 : 4;
@@ -436,7 +567,7 @@ function App() {
     <>
       <Canvas shadows camera>
         <GradientBackground />
-        <ambientLight intensity={0.5} color={0xffffff} />
+        <ambientLight intensity={0.6} color={0xffffff} />
         <SpotLight intensity={50} position={[8, 8, 8]} angle={Math.PI / 5} />
         <EffectComposer>
           <Vignette eskil={false} offset={0.1} darkness={0.5} />
