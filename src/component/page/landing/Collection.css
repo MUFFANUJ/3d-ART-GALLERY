@@ -1,0 +1,18 @@
+.back-button {
+  background-color:rgba(255, 255, 255, 0.2); /* Semi-transparent black */
+  color: #fff; /* White text */
+  border: 1px solid #fff; /* White border */
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px; /* Slightly smaller font */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); /* Subtle white shadow for depth */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Lighter black on hover for subtle effect */
+}

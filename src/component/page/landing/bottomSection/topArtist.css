@@ -91,3 +91,40 @@
   background-color: grey;
 }
 
+@media (max-width: 768px) {
+  .top-artist-carousel-item {
+    flex: 1 0 33.33%; 
+    padding: 8px;
+  }
+
+  .top-artist-carousel-image {
+    height: 150px; 
+  }
+
+  .top-artist-artist-name {
+    font-size: 18px;
+  }
+
+  .top-artist-artist-description {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-artist-carousel-item {
+    flex: 1 0 50%; 
+    padding: 5px;
+  }
+
+  .top-artist-carousel-image {
+    height: 120px; 
+  }
+
+  .top-artist-artist-name {
+    font-size: 16px;
+  }
+
+  .top-artist-artist-description {
+    font-size: 12px;
+  }
+}

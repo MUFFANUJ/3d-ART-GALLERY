@@ -1,16 +1,43 @@
+
 .container {
   display: flex;
-  justify-content: center; /* Centers content horizontally */
-  width: 100%; /* Full width container */
+  justify-content: center;
+  flex-wrap: wrap; 
+  width: 100%;
 }
 
 .image {
-  width: 100%; /* Full width of the container */
-  height: auto; /* Maintains aspect ratio */
-  cursor: pointer; /* Indicates it’s clickable */
-  transition: transform 0.3s ease; /* Smooth hover effect */
+  width: 100%;
+  height: auto; 
+  cursor: pointer; 
+  transition: transform 0.3s ease; 
 }
 
 .image:hover {
-  transform: scale(1.05); /* Slight zoom on hover */
+  transform: scale(1.05); 
 }
+
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .image {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 5px;
+  }
+
+  .image {
+    width: 100%; 
+    height: auto; 
+  }
+}
+

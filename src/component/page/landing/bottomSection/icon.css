@@ -1,42 +1,82 @@
-/* Container for all icon boxes */
 .icon-container {
   display: flex;
-  justify-content: space-between; /* Spreads items evenly */
-  align-items: center; /* Centers the items vertically */
+  justify-content: space-between;
+  align-items: center; 
   width: 100%;
-  max-width: 1200px; /* Adjust this for your design */
-  margin: 0 auto; /* Center the container */
+  max-width: 1200px; 
+  margin: 0 auto; 
   padding: 40px 20px;
   text-align: center;
 }
 
-/* Individual box containing an icon and its text */
 .icon-box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1; /* Flex-grow to evenly distribute the boxes */
+  flex: 1; 
   padding: 20px;
   font-family: 'Playfair Display', serif;
 }
 
-/* Styling for the icons */
 .icon {
-  font-size: 48px; /* Increase icon size */
+  font-size: 48px; 
   margin-bottom: 20px;
-  color: black; /* Icon color */
+  color: black;
 }
 
-/* Heading */
 .icon-box h2 {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-/* Description paragraph */
 .icon-box p {
   font-size: 14px;
   color: #555;
-  max-width: 250px; /* Limits the paragraph width for better readability */
+  max-width: 250px; 
 }
+
+@media (max-width: 768px) {
+  .icon-container {
+    justify-content: space-around;
+  }
+
+  .icon-box {
+    flex-basis: 45%;
+    padding: 15px;
+  }
+
+  .icon {
+    font-size: 40px;
+  }
+
+  .icon-box h2 {
+    font-size: 16px;
+  }
+
+  .icon-box p {
+    font-size: 12px;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .icon-box {
+    flex-basis: 100%;
+    padding: 10px;
+  }
+
+  .icon {
+    font-size: 36px; 
+  }
+
+  .icon-box h2 {
+    font-size: 14px;
+  }
+
+  .icon-box p {
+    font-size: 12px;
+    max-width: 100%;
+  }
+}
+

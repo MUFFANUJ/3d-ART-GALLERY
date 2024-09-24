@@ -1,5 +1,6 @@
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import React, { Suspense, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import {
   SpotLight,
   Text,
@@ -13,6 +14,8 @@ import { TextureLoader, Vector3, Color } from "three";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
+import './Collection.css';
 
 const ART_PIECES = {
   nature:[
@@ -443,6 +446,7 @@ const GradientBackground = () => {
 };
 
 function Collection() {
+  const navigate = useNavigate();
   const { category } = useParams();
   const selectedArtPieces = ART_PIECES[category] || [];
   console.log("this is my category -> ", category);
@@ -495,6 +499,13 @@ function Collection() {
 
   return (
     <>
+      <button
+        className="back-button"
+        onClick={() => navigate('/')}  // Navigate directly to the landing page
+        style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 1000 }}
+      >
+        <IoArrowBack size={25} /> Back
+      </button>
       <Canvas shadows camera>
         <GradientBackground />
         <ambientLight intensity={0.5} color={0xffffff} />

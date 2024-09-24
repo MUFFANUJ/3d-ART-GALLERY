@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import { CartProvider } from './component/page/landing/header/cartContext';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <CartProvider> {/* Wrap App in CartProvider */}
+      <App />
+    </CartProvider>
   </React.StrictMode>
 );
 

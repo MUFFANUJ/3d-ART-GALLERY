@@ -14,6 +14,39 @@
   font-family: 'Playfair Display', serif;
 }
 
+@media (max-width: 768px) {
+  .explore-menu-header {
+    font-size: 1.8rem;
+  }
+
+  .explore-menu-item {
+    width: 200px;
+    height: 200px;
+  }
+
+  .inner-circle {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .explore-menu-header {
+    font-size: 1.5rem;
+  }
+
+  .explore-menu-item {
+    width: 150px;
+    height: 150px;
+  }
+
+  .inner-circle {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+
 .explore-menu-list {
   display: flex;
   justify-content: space-around; 

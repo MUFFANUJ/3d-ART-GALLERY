@@ -7,7 +7,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import LandingPage from './component/page/landing/landingpage';
 import Collection from './component/page/landing/collection';
-// import NatureCollection from './component/page/landing/naturecollection'; // Make sure this path is correct
 import './App.css';
 
 function App() {
