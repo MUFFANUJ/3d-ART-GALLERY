@@ -1,6 +1,6 @@
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
-import React, { Suspense, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { Suspense, useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import {
   SpotLight,
   Text,
@@ -14,8 +14,7 @@ import { TextureLoader, Vector3, Color } from "three";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { IoArrowBack } from "react-icons/io5";
-import { FaHeart } from "react-icons/fa";
-import "./Gallery.css";
+import './Gallery.css';
 
 const ART_PIECES = [
   {
@@ -64,7 +63,7 @@ const ART_PIECES = [
 
 const WallArt = (props) => {
   console.log("this is props in wallArt -> ", props);
-  const { art, i, addToCart,toggleFavourite, favourites } = props;
+  const { art, i, addToCart } = props;
   const { width: w, height: h } = useThree((state) => state.viewport);
   const gap = 2; // Horizontal gap between images
   const imageWidth = 3;
@@ -117,7 +116,7 @@ const WallArt = (props) => {
         font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
         maxWidth={imageWidth} // Ensure text does not exceed the image width
       >
-        {art.title} - {`$${art.price}`}
+        {art.title}   - {`$${art.price}`}
       </Text>
       <mesh
         position={[xPosition, yPositionButton, 0]}
@@ -130,7 +129,7 @@ const WallArt = (props) => {
           radius={0.05} // The border radius
           smoothness={16} // Higher smoothness for smoother corners
         >
-          <meshStandardMaterial color={0xffffff} />
+          <meshStandardMaterial color={0xFFFFFF} />
         </RoundedBox>
         <Text
           position-z={0.1}
@@ -141,34 +140,6 @@ const WallArt = (props) => {
           font="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
         >
           Add to Cart
-        </Text>
-      </mesh>
-
-      <mesh
-        position={[xPosition, yPositionButton, 0]}
-        onClick={() => addToCart(art)}
-      >
-        {/* Existing RoundedBox and Text for cart */}
-      </mesh>
-      {/* Favourite button */}
-      <mesh
-        position={[xPosition, yPositionButton - 0.5, 0]} // Slightly below the Add to Cart button
-        onClick={() => toggleFavourite(art)}
-      >
-        <RoundedBox args={[1.2, 0.4, 0.1]} radius={0.05} smoothness={16}>
-          <meshStandardMaterial
-            color={favourites.includes(art) ? "#ff69b4" : "#ccc"}
-          />
-        </RoundedBox>
-        <Text
-          position-z={0.1}
-          scale={[1, 1, 1]}
-          color="black"
-          anchorX="center"
-          anchorY="middle"
-          font="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
-        >
-          <FaHeart /> {/* Icon inside the button */}
         </Text>
       </mesh>
 
@@ -186,7 +157,7 @@ const WallArt = (props) => {
   );
 };
 
-const Scene = ({ addToCart,toggleFavourite, favourites }) => {
+const Scene = ({ addToCart }) => {
   console.log("this is add to cart in -> ", addToCart);
   const { width: screenWidth } = useThree((state) => state.viewport);
   console.log("screenWidth", screenWidth);
@@ -253,6 +224,10 @@ const Scene = ({ addToCart,toggleFavourite, favourites }) => {
 
 const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
   const [isOpen, setIsOpen] = useState(false); // State to toggle cart visibility
+
+  const calculateTotal = () => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
 
   return (
     <div>
@@ -421,6 +396,34 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
               ))}
             </ul>
           )}
+          <div
+            style={{
+              marginTop: "15px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "10px 0",
+              borderTop: "1px solid #ddd",
+            }}
+          >
+            <span style={{ fontWeight: "bold", fontSize: "16px" }}>
+              Total: ${calculateTotal()}
+            </span>
+            <button
+              style={{
+                padding: "8px 16px",
+                fontSize: "16px",
+                borderRadius: "5px",
+                backgroundColor: "#909090",
+                border: "none",
+                color: "white",
+                cursor: "pointer",
+              }}
+              onClick={() => alert('Proceed to Checkout')}
+            >
+              Buy Now
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -447,7 +450,18 @@ const GradientBackground = () => {
 function App() {
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
-  const [favourites, setFavourites] = useState([]);
+
+  useEffect(() => {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, []);
+
+  // Save cart to local storage
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   const handleAddToCart = (item) => {
     setCart((prevCart) => {
@@ -462,16 +476,6 @@ function App() {
         );
       }
       return [...prevCart, { ...item, quantity: 1 }];
-    });
-  };
-
-  const toggleFavourite = (item) => {
-    setFavourites((prev) => {
-      const isExisting = prev.find((fav) => fav.title === item.title);
-      if (isExisting) {
-        return prev.filter((fav) => fav.title !== item.title);
-      }
-      return [...prev, item];
     });
   };
 
@@ -501,25 +505,15 @@ function App() {
     );
   };
 
-  
-
   return (
     <>
       <button
-      className="back-button"
-      onClick={() => navigate("/")}
-      style={{ position: "absolute", top: "20px", left: "20px", zIndex: 1000 }}
-    >
-      <IoArrowBack size={25} /> Back
-    </button>
-    <div
-      style={{ position: "absolute", top: 20, right: 70, cursor: "pointer" }}
-    >
-      <FaHeart style={{ color: "white", fontSize: "24px" }} />
-      <span style={{ color: "white", fontSize: "24px" }}>
-        {favourites.length}
-      </span>
-    </div>
+        className="back-button"
+        onClick={() => navigate('/')}  // Navigate directly to the landing page
+        style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 1000 }}
+      >
+        <IoArrowBack size={25} /> Back
+      </button>
       <Canvas shadows camera>
         <GradientBackground />
         <ambientLight intensity={0.6} color={0xffffff} />
@@ -528,7 +522,7 @@ function App() {
           <Vignette eskil={false} offset={0.1} darkness={0.5} />
         </EffectComposer>
         <Rig />
-        <Scene addToCart={handleAddToCart} toggleFavourite={toggleFavourite} favourites={favourites}/>
+        <Scene addToCart={handleAddToCart} />
       </Canvas>
       <Cart
         cart={cart}

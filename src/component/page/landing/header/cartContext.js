@@ -1,32 +1,58 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Create Context object
 const CartContext = createContext();
 
-// Custom hook for using context easily
 export const useCart = () => useContext(CartContext);
 
-// Provider component that wraps your app components
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState([]);
 
-  const handleAddToCart = (item) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find(cartItem => cartItem.title === item.title);
-      if (existingItem) {
-        return prevCart.map(cartItem =>
-          cartItem.title === item.title
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
+    useEffect(() => {
+        const savedCart = localStorage.getItem('cart');
+        if (savedCart) {
+            setCart(JSON.parse(savedCart));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]);
+
+    const handleAddToCart = (item) => {
+        setCart((prevCart) => {
+            const existingItem = prevCart.find(cartItem => cartItem.title === item.title);
+            if (existingItem) {
+                return prevCart.map(cartItem =>
+                    cartItem.title === item.title ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+                );
+            }
+            return [...prevCart, { ...item, quantity: 1 }];
+        });
+    };
+
+    const handleIncrement = (item) => {
+        setCart((prevCart) =>
+            prevCart.map(cartItem =>
+                cartItem.title === item.title ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+            )
         );
-      }
-      return [...prevCart, { ...item, quantity: 1 }];
-    });
-  };
+    };
 
-  return (
-    <CartContext.Provider value={{ cart, handleAddToCart }}>
-      {children}
-    </CartContext.Provider>
-  );
+    const handleDecrement = (item) => {
+        setCart((prevCart) =>
+            prevCart.map(cartItem =>
+                cartItem.title === item.title && cartItem.quantity > 1 ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+            )
+        );
+    };
+
+    const handleDelete = (item) => {
+        setCart(prevCart => prevCart.filter(cartItem => cartItem.title !== item.title));
+    };
+
+    return (
+        <CartContext.Provider value={{ cart, handleAddToCart, handleIncrement, handleDecrement, handleDelete }}>
+            {children}
+        </CartContext.Provider>
+    );
 };

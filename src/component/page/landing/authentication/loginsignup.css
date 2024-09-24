@@ -1,0 +1,48 @@
+.login-container, .signup-container {
+  width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #000;
+  border-radius: 8px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.button.black {
+  background-color: #000;
+}
+
+.button.white {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.button.black:hover, .button.white:hover {
+  opacity: 0.9;
+}

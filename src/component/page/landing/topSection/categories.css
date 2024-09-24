@@ -8,16 +8,15 @@
 
 .image {
   width: 100%;
-  height: auto; 
   cursor: pointer; 
   transition: transform 0.3s ease; 
 }
 
 .image:hover {
   transform: scale(1.05); 
-}
+} 
 
-
+/* 
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -39,5 +38,5 @@
     width: 100%; 
     height: auto; 
   }
-}
-
+} */
+ 

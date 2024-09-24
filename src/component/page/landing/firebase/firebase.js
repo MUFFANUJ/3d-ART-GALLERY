@@ -36,4 +36,4 @@ export const googleSignIn = async () => {
   }
 };
 
-export { auth };
+export { app,auth };

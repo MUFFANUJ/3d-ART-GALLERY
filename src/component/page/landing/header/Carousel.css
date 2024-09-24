@@ -110,3 +110,7 @@
 .dot.active {
   background-color: #333;
 }
+
+.text-container p {
+  color: balck;
+}

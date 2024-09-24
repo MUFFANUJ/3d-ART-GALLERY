@@ -1,29 +1,54 @@
-import React from 'react';
-import { useCart } from './cartContext';
-import { FaRegHeart } from "react-icons/fa";
-import { CgProfile } from "react-icons/cg";
+import React, { useEffect, useState } from "react";
+// import { CgProfile } from "react-icons/cg";
 import { IoCartOutline } from "react-icons/io5";
-import './navbar.css';
+import "./navbar.css";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+
+// import LoginModal from "../../../../LoginModal";
 
 const Navbar = () => {
-  const { cart } = useCart(); // Access cart from context
-
+  const [cartItems, setCartItems] = useState([]);
+  // const [isOpen, setIsOpen] = useState(false);
+  const cart = localStorage.getItem("cart");
+  useEffect(() => {
+    setCartItems(JSON.parse(cart));
+  }, [cart]);
+  console.log(cartItems);
   return (
     <div>
-      <nav className='header'>
-        <img src="/assests/images/mainlogo.png" alt="Kalakriti" className="logo" />
+      {/* {isOpen && console.log(isOpen, "cfvbdbbvcb")}
+      {isOpen && (
+
+        <div>
+          <LoginModal />
+        </div>
+      )} */}
+      <nav className="header">
+        <img
+          src="/assests/images/mainlogo.png"
+          alt="Kalakriti"
+          className="logo"
+        />
         <div className="nav-icons">
-          <div className="nav-icon">
-            <FaRegHeart />
-            <span>Favourites</span>
-          </div>
-          <div className="nav-icon">
-            <CgProfile />
-            <span>Sign in</span>
+          <div
+            // onClick={() => {
+            //   setIsOpen(true);
+            // }}
+            className="nav-icon"
+          >
+            <SignedOut>
+        <SignInButton />
+      </SignedOut>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+            {/* <CgProfile /> */}
+            
+            {/* <span>Sign in</span> */}
           </div>
           <div className="nav-icon">
             <IoCartOutline />
-            <span>Cart ({cart.length})</span>  {/* Display cart count here */}
+            <span>Cart {cartItems.length}</span>
           </div>
         </div>
       </nav>

@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import {
   SpotLight,
@@ -22,74 +22,74 @@ const ART_PIECES = {
     {
       title: "Flowers And Fruits",
       imgPath: "assests/images/naturepalete/n1.webp",
-      price: " 2610",
+      price: 2610,
     },
     {
       title: "Graphic Botanical Mini",
       imgPath: "assests/images/naturepalete/n2.webp",
-      price: " 6750",
+      price: 6750,
     },
     {
       title: "Green Twig No 3",
       imgPath: "assests/images/naturepalete/n4.webp",
-      price: " 3770",
+      price: 3770,
     },
     {
       title: "Flowers And Fruits",
       imgPath: "assests/images/naturepalete/n1.webp",
-      price: " 2610",
+      price: 2610,
     },
     {
       title: "Graphic Botanical Mini",
       imgPath: "assests/images/naturepalete/n2.webp",
-      price: " 6750",
+      price: 6750,
     },
     {
       title: "Green Twig No 3",
       imgPath: "assests/images/naturepalete/n4.webp",
-      price: " 3770",
+      price: 3770,
     },
     {
       title: "Flowers And Fruits",
       imgPath: "assests/images/naturepalete/n1.webp",
-      price: " 2610",
+      price: 2610,
     },
   ],
   pichwai: [
     {
       title: "Beautiful Beast",
       imgPath: "assests/images/pichwai/p1.webp",
-      price: "\u20B9 3770",
+      price: 3770,
     },
     {
       title: "Stillness",
       imgPath: "assests/images/pichwai/p2.webp",
-      price: "\u20B9 3770",
+      price: 3770,
     },
     {
       title: "Foxy",
       imgPath: "assests/images/pichwai/p3.webp",
-      price: "\u20B9 3330",
+      price: 3330,
     },
     {
       title: "Gentle Giant",
       imgPath: "assests/images/pichwai/p4.webp",
-      price: "\u20B9 3770",
+      price: 3770,
     },
     {
       title: "Purity",
       imgPath: "assests/images/pichwai/p5.webp",
-      price: "\u20B9 2410",
+      price: 2410,
     },
     {
       title: "Lonely Together",
       imgPath: "assests/images/pichwai/p6.webp",
-      price: "₹ 2080",
+      price: 2080,
     },
     {
       title: "Owl",
       imgPath: "assests/images/pichwai/p7.webp",
-      price: "₹ 2410",
+      price: 2410,
     },
   ],
 };
@@ -257,6 +257,10 @@ const Scene = ({ addToCart, selectedArtPieces }) => {
 const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
   const [isOpen, setIsOpen] = useState(false); // State to toggle cart visibility
 
+  const calculateTotal = () => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+
   return (
     <div>
       {/* Cart Icon Button */}
@@ -420,8 +424,36 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
                   </div>
                 </li>
               ))}
-            </ul>
+            </ul>     
           )}
+          <div
+            style={{
+              marginTop: "15px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "10px 0",
+              // borderTop: "1px solid #ddd",
+            }}
+          >
+            <span style={{ fontWeight: "bold", fontSize: "16px" }}>
+              Total: ${calculateTotal()}
+            </span>
+            <button
+              style={{
+                padding: "8px 16px",
+                fontSize: "16px",
+                borderRadius: "5px",
+                backgroundColor: "#909090",
+                border: "none",
+                color: "white",
+                cursor: "pointer",
+              }}
+              onClick={() => alert('Proceed to Checkout')}
+            >
+              Buy Now
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -450,10 +482,18 @@ function Collection() {
   const { category } = useParams();
   const selectedArtPieces = ART_PIECES[category] || [];
   console.log("this is my category -> ", category);
-  // category?:(data[0].category.map(()=>{
-
-  // })):()
+  
   const [cart, setCart] = useState([]);
+  useEffect(() => {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   const handleAddToCart = (item) => {
     setCart((prevCart) => {
