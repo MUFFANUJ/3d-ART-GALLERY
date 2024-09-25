@@ -16,21 +16,23 @@ const Footer = () => {
             purchase at your leisure.
           </p>
           <div className="footer-social-icons">
-            <CiLinkedin size={35} />
-            <FaInstagram size={35} />
+          <a href="https://www.linkedin.com/in/mehak-jain-587b81288/" target="_blank" rel="noopener noreferrer">
+              <CiLinkedin size={35} />
+            </a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+              <FaInstagram size={35} />
+            </a>
           </div>
         </div>
         <div className="footer-content-center">
-          <h2>Company</h2>
           <ul>
-            <li>Home</li>
-            <li>About us</li>
-            <li>Delivery</li>
-            <li>Privacy policy</li>
+          <li><a href="/">Home</a></li>
+            <li><a href="/">About Us</a></li>
+            {/* <li>Delivery</li>
+            <li>Privacy policy</li> */}
           </ul>
         </div>
         <div className="footer-content-right">
-          <h2>Get in Touch</h2>
           <ul>
             <li>
               <FaPhone className="footer-icon" /> 7037309567
