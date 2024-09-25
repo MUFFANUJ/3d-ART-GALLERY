@@ -49,7 +49,7 @@ const BottomSection = () => {
   ];
 
   return (
-    <div>
+    <div id="top-artists">
       <h1
         style={{
           textAlign: "center",

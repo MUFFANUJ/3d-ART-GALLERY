@@ -244,22 +244,32 @@ const Navbar = () => {
             <span style={{ fontWeight: 'bold', fontSize: '16px' }}>
               Total: ${calculateTotal()}
             </span>
-            <button onClick={handleBuyNow} style={{
-              padding: '8px 16px',
-              fontSize: '16px',
-              borderRadius: '5px',
-              backgroundColor: '#909090',
-              border: 'none',
-              color: 'white',
-              cursor: 'pointer'
-            }} disabled={cart.length === 0}>
-              Buy Now
-            </button>
+            {isLoading ? (
+              <div>Loading...</div>
+            ) : showToast ? (
+              <span style={{ color: "#4CAF50", fontSize: "16px" }}>
+                Payment Successful
+              </span>
+            ) : (
+              <button
+                style={{
+                  padding: "8px 16px",
+                  fontSize: "16px",
+                  borderRadius: "5px",
+                  backgroundColor: "#909090",
+                  border: "none",
+                  color: "white",
+                  cursor: "pointer",
+                }}
+                onClick={handleBuyNow}
+                disabled={cart.length === 0}
+              >
+                Buy Now
+              </button>
+            )}
           </div>
         </div>
       )}
-      {isLoading && <div>Loading...</div>}
-      {showToast && <div>Operation successful!</div>}
     </div>
   );
 };

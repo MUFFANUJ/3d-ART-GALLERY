@@ -11,7 +11,7 @@ const Topsection = () => {
   };
 
   return (
-    <div style={{ paddingBottom: "120px" }}>
+    <div style={{ paddingBottom: "120px" }} id="trending-art">
       <Button />
       <Trending />
       <div style={{ height: "60px" }}></div>

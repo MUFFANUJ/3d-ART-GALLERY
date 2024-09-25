@@ -5,6 +5,21 @@ import { FaInstagram } from "react-icons/fa";
 import { FaPhone, FaEnvelope } from "react-icons/fa";
 
 const Footer = () => {
+
+  const scrollToTrendingArt = () => {
+    const section = document.getElementById('trending-art');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const scrollToTopArtists = () => {
+    const section = document.getElementById('top-artists');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="footer">
       <hr className="hr" />
@@ -16,18 +31,29 @@ const Footer = () => {
             purchase at your leisure.
           </p>
           <div className="footer-social-icons">
-          <a href="https://www.linkedin.com/in/mehak-jain-587b81288/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.linkedin.com/in/mehak-jain-587b81288/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <CiLinkedin size={35} />
             </a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaInstagram size={35} />
             </a>
           </div>
         </div>
         <div className="footer-content-center">
           <ul>
-          <li><a href="/">Home</a></li>
-            <li><a href="/">About Us</a></li>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li><a href="/" onClick={(e) => { e.preventDefault(); scrollToTrendingArt(); }}>Trending Art</a></li>
+            <li><a href="/" onClick={(e) => { e.preventDefault(); scrollToTopArtists(); }}>Top Artists</a></li>
             {/* <li>Delivery</li>
             <li>Privacy policy</li> */}
           </ul>
