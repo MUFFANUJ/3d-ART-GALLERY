@@ -6,7 +6,6 @@ const TopArtist = ({ artists }) => {
 
   const nextSlide = () => {
     if (currentIndex < Math.max(artists.length - 4, 0)) {
-      // Prevents going out of bounds
       setCurrentIndex(currentIndex + 1);
     }
   };
@@ -20,7 +19,7 @@ const TopArtist = ({ artists }) => {
   return (
     <div className="top-artist-carousel-container">
       <button className="top-artist-carousel-button prev" onClick={prevSlide}>
-        &#10094; {/* Left arrow */}
+        &#10094;
       </button>
       <div className="top-artist-carousel-images-wrapper">
         <div
@@ -45,7 +44,7 @@ const TopArtist = ({ artists }) => {
         </div>
       </div>
       <button className="top-artist-carousel-button next" onClick={nextSlide}>
-        &#10095; {/* Right arrow */}
+        &#10095;
       </button>
     </div>
   );

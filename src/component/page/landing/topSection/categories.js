@@ -1,6 +1,5 @@
-import React from 'react';
-// import { Link } from 'react-router-dom';
-import styles from './categories.css';
+import React from "react";
+import styles from "./categories.css";
 
 const Category = ({ imageUrl, link, title, onClick }) => {
   return (

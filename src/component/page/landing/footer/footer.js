@@ -2,7 +2,7 @@ import React from "react";
 import "./footer.css";
 import { CiLinkedin } from "react-icons/ci";
 import { FaInstagram } from "react-icons/fa";
-import { FaPhone, FaEnvelope} from "react-icons/fa"; 
+import { FaPhone, FaEnvelope } from "react-icons/fa";
 
 const Footer = () => {
   return (

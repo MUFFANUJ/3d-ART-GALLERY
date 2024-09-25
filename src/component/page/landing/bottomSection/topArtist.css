@@ -1,80 +1,74 @@
-/* Carousel container */
 .top-artist-carousel-container {
   display: flex;
   align-items: center;
   position: relative;
   width: 100%;
   max-width: 1024px;
-  margin: 0 auto; /* Center the carousel */
-  overflow: hidden; /* Hide the overflowing images */
+  margin: 0 auto;
+  overflow: hidden;
 }
 
-/* Wrapper for the images */
 .top-artist-carousel-images-wrapper {
   width: 100%;
   display: flex;
   overflow: hidden;
 }
 
-/* Images container (moves left-right) */
 .top-artist-carousel-images {
   display: flex;
-  transition: transform 0.5s ease-in-out; /* Smooth sliding effect */
+  transition: transform 0.5s ease-in-out;
 }
 
-/* Individual image container */
 .top-artist-carousel-item {
-  flex: 1 0 25%; /* Each item takes 25% of the width (4 items per row) */
+  flex: 1 0 25%;
   padding: 10px;
   text-align: center;
 }
 
 .top-artist-carousel-image {
   width: 100%;
-  height: 200px; /* Fixed height for consistent sizing */
-  object-fit: cover; /* Ensures all images are cropped to fit and consistent */
+  height: 200px;
+  object-fit: cover;
   border-radius: 10px;
   margin-bottom: 10px;
 }
 
 .top-artist-artist-info {
-  font-size: 16px; /* Increase font size for better visibility */
+  font-size: 16px;
   color: #333;
   display: flex;
-  flex-direction: column; /* Stack name and description vertically */
-  align-items: center; /* Center align the text */
+  flex-direction: column;
+  align-items: center;
 }
 
 .top-artist-artist-name {
-  font-weight: bold; /* Make artist name bold */
-  font-size: 20px; /* Larger font size for the name */
-  width: 100%; /* Ensure the name takes full width to fit in one line */
-  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  font-size: 20px;
+  width: 100%;
+  font-family: "Playfair Display", serif;
 }
 
 .top-artist-artist-description {
   font-style: italic;
-  font-size: 16px; /* Slightly larger description for readability */
-  padding-top: 5px; /* Space between name and description */
-  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  padding-top: 5px;
+  font-family: "Playfair Display", serif;
 }
 
-
-/* Prev and Next buttons */
 .top-artist-carousel-button {
   background-color: white;
   border: none;
   font-size: 24px;
   cursor: pointer;
   padding: 10px;
-  width: 50px;  
+  width: 50px;
   height: 50px;
   border-radius: 50%;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  display: flex;       
-  align-items: center; 
+  display: flex;
+  align-items: center;
   justify-content: center;
   z-index: 2;
 }
@@ -93,12 +87,12 @@
 
 @media (max-width: 768px) {
   .top-artist-carousel-item {
-    flex: 1 0 33.33%; 
+    flex: 1 0 33.33%;
     padding: 8px;
   }
 
   .top-artist-carousel-image {
-    height: 150px; 
+    height: 150px;
   }
 
   .top-artist-artist-name {
@@ -112,12 +106,12 @@
 
 @media (max-width: 480px) {
   .top-artist-carousel-item {
-    flex: 1 0 50%; 
+    flex: 1 0 50%;
     padding: 5px;
   }
 
   .top-artist-carousel-image {
-    height: 120px; 
+    height: 120px;
   }
 
   .top-artist-artist-name {

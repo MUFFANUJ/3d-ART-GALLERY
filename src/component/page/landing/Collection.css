@@ -1,18 +1,18 @@
 .back-button {
-  background-color:rgba(255, 255, 255, 0.2); /* Semi-transparent black */
-  color: #fff; /* White text */
-  border: 1px solid #fff; /* White border */
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 1px solid #fff;
   cursor: pointer;
   padding: 10px 20px;
   border-radius: 5px;
-  font-size: 14px; /* Slightly smaller font */
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); /* Subtle white shadow for depth */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.3s ease;
 }
 
 .back-button:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Lighter black on hover for subtle effect */
+  background-color: rgba(255, 255, 255, 0.1);
 }

@@ -12,7 +12,7 @@
   font-size: 24px;
   font-weight: bold;
   color: white;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
 }
 
 .header .nav-icons {
@@ -27,7 +27,7 @@
   margin-left: 20px;
   font-size: 16px;
   cursor: pointer;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
 }
 
 .header .nav-icon:hover {

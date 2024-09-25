@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -29,18 +29,19 @@ body,
   gap: 20px;
 }
 
-.faq-box, .contact-box {
-  padding: 40px 80px; /* Adjusted padding inside the boxes */
+.faq-box,
+.contact-box {
+  padding: 40px 80px;
   margin: 30px 100px;
   background: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
 
 h2 {
   color: #333;
   text-align: center;
-  margin-bottom: 20px; /* Adds space below the header */
+  margin-bottom: 20px;
 }
 
 .faq-item p {
@@ -59,7 +60,7 @@ h2 {
 }
 
 .faq-item.open .arrow {
-  transform: rotate(45deg); /* Rotates the arrow to indicate open state */
+  transform: rotate(45deg);
 }
 
 .faq-item p {
@@ -71,25 +72,25 @@ h2 {
 }
 
 .faq-item p:hover {
-  color: #007BFF; /* Highlight color on hover */
+  color: #007bff;
 }
-
 
 .faq-item p:hover {
-  color: #007BFF; /* Highlight color on hover */
+  color: #007bff;
 }
 
-/* Optional: add some transition effects for smooth opening/closing */
 .faq-item p {
   transition: color 0.3s ease;
 }
 
-.contact-info, .social-media {
+.contact-info,
+.social-media {
   text-align: left;
-  margin-top: 10px; /* Reduced vertical spacing */
+  margin-top: 10px;
 }
 
-p, li {
+p,
+li {
   color: #666;
   font-size: 16px;
 }
@@ -100,7 +101,7 @@ ul {
 }
 
 a {
-  color: #007BFF;
+  color: #007bff;
   text-decoration: none;
 }
 
@@ -109,41 +110,38 @@ a:hover {
 }
 
 button {
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px; /* Ensures button is not too close to text */
+  margin-top: 20px;
 }
 
-/* General body styling */
-/* Wrapper around the carousel to manage overflow and positioning */
 .carousel-wrapper {
   position: relative;
-  width: 1000px; /* Increased width to accommodate larger cards */
+  width: 1000px;
   overflow: hidden;
-  margin: 40px auto; /* Increased margin for better spacing */
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2); /* Enhanced shadow for better depth */
+  margin: 40px auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .carousel1 {
   display: flex;
   transition: transform 0.3s ease-in-out;
-  will-change: transform; 
+  will-change: transform;
 }
 
-/* Individual card styling */
 .card {
   flex: 0 0 auto;
-  width: 250px; 
+  width: 250px;
   height: 350px;
-  margin: 20px; 
-  background-color: #fff; 
-  border-radius: 12px; 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
-  overflow: hidden; 
+  margin: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -152,52 +150,46 @@ button {
 .card-image img {
   width: 100%;
   height: auto;
-  transition: transform 0.3s ease, filter 0.3s ease; 
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* Hover effects on the card image */
 .card-image:hover img {
-  filter: blur(1px) brightness(80%); 
+  filter: blur(1px) brightness(80%);
   transform: scale(1.15);
 }
 
 .card-info {
-  padding: 15px; /* Increased padding around text */
-  text-align: center; /* Center align text */
+  padding: 15px;
+  text-align: center;
 }
 
-h3, p {
-  margin: 10px 0; /* Increased margin for heading and paragraph within card-info */
+h3,
+p {
+  margin: 10px 0;
 }
 
-/* Navigation buttons styling */
-.prev, .next {
+.prev,
+.next {
   position: absolute;
-  top: 50%; /* Align buttons vertically in the middle */
-  transform: translateY(-50%); /* Offset transform to perfectly center */
-  background-color: #f8f9fa; /* Button background color */
-  border: none; /* No border */
-  cursor: pointer; /* Pointer cursor on hover */
-  padding: 15px 25px; /* Larger padding inside buttons */
-  font-size: 26px; /* Slightly larger font size for better visibility */
-  color: #333; /* Button text color */
-  z-index: 100; /* Ensure buttons are above other content */
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #f8f9fa;
+  border: none;
+  cursor: pointer;
+  padding: 15px 25px;
+  font-size: 26px;
+  color: #333;
+  z-index: 100;
 }
 
 .prev {
-  left: 10px; /* Slightly more inward to align with the larger card size */
+  left: 10px;
 }
 
 .next {
-  right: 10px; /* Slightly more inward to align with the larger card size */
+  right: 10px;
 }
 
-.page-background{
-  background-color: #1D2951;
+.page-background {
+  background-color: #1d2951;
 }
-
-
-
-
-
-

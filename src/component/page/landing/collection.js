@@ -1,6 +1,6 @@
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import React, { Suspense, useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import {
   SpotLight,
   Text,
@@ -15,10 +15,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
-import './Collection.css';
+import "./Collection.css";
 
 const ART_PIECES = {
-  nature:[
+  nature: [
     {
       title: "Flowers And Fruits",
       imgPath: "assests/images/naturepalete/n1.webp",
@@ -102,9 +102,9 @@ const WallArt = ({ art, i, addToCart }) => {
   const texture = useLoader(TextureLoader, art.imgPath);
 
   const xPosition = (i + 1) * (imageWidth + gap) + (i + 1);
-  const baseYPosition = 0; // Center y position of the image
-  const titleAndPriceYPosition = baseYPosition + imageHeight / 2 + 0.5; // Above the image
-  const yPositionButton = baseYPosition - imageHeight / 2 - 0.5; // Below the image
+  const baseYPosition = 0;
+  const titleAndPriceYPosition = baseYPosition + imageHeight / 2 + 0.5;
+  const yPositionButton = baseYPosition - imageHeight / 2 - 0.5;
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
@@ -140,27 +140,15 @@ const WallArt = ({ art, i, addToCart }) => {
       </mesh>
       <Text
         position={[xPosition, titleAndPriceYPosition, 0]}
-        scale={[1.8, 1.8, 1.8]} // Slightly larger font scale
+        scale={[1.8, 1.8, 1.8]}
         color="white"
         anchorX="center"
         anchorY="middle"
         font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
-        maxWidth={imageWidth} // Ensure text does not exceed the image width
+        maxWidth={imageWidth}
       >
-        {art.title}  -   {`$${art.price}`}
+        {art.title} - {`$${art.price}`}
       </Text>
-
-      {/* <Text
-        position={[xPosition, titleAndPriceYPosition - 0.5, 0]} // Slightly lower position to reduce vertical distance
-        scale={[1.6, 1.6, 1.6]} // Uniform font scale with title
-        color="black"
-        anchorX="center" // Adjust to 'center' for consistent alignment with the title
-        anchorY="middle"
-        font="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap"
-        maxWidth={imageWidth} // Same as title to keep within image bounds
-      >
-        {`$${art.price}`}
-      </Text> */}
 
       <mesh
         position={[xPosition, yPositionButton, 0]}
@@ -168,16 +156,12 @@ const WallArt = ({ art, i, addToCart }) => {
         onPointerOver={(e) => e.stopPropagation()}
         onPointerDown={(e) => e.stopPropagation()}
       >
-        <RoundedBox // Using RoundedBox for rounded corners
-          args={[1.2, 0.4, 0.1]} // width, height, depth
-          radius={0.05} // The border radius
-          smoothness={16} // Higher smoothness for smoother corners
-        >
+        <RoundedBox args={[1.2, 0.4, 0.1]} radius={0.05} smoothness={16}>
           <meshStandardMaterial color={0x000000} />
         </RoundedBox>
         <Text
           position-z={0.1}
-          scale={[1.6, 1.6, 1.6]} // Increased scale for larger font
+          scale={[1.6, 1.6, 1.6]}
           color="white"
           anchorX="center"
           anchorY="middle"
@@ -214,7 +198,7 @@ const Scene = ({ addToCart, selectedArtPieces }) => {
         distance={1}
       >
         <Scroll>
-        <Text
+          <Text
             position-z={0}
             anchorX="center"
             anchorY="bottom"
@@ -236,14 +220,6 @@ const Scene = ({ addToCart, selectedArtPieces }) => {
           >
             Art is knowing which ones to keep.
           </Text>
-          {/* <Text
-            position={[0, -0.5, 1.5]}
-            anchorX="center"
-            anchorY="top"
-            font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
-          >
-            ~ Scott Adams
-          </Text> */}
 
           {selectedArtPieces.map((art, i) => (
             <WallArt key={i} i={i} art={art} addToCart={addToCart} />
@@ -254,16 +230,37 @@ const Scene = ({ addToCart, selectedArtPieces }) => {
   );
 };
 
-const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
-  const [isOpen, setIsOpen] = useState(false); // State to toggle cart visibility
+const Cart = ({ cart, setCart, onIncrement, onDecrement, onDelete }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  const handleBuyNow = async () => {
+    if (cart.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+        clearCart();
+      }, 1000); // Automatically hide the toast after 3 seconds
+    }, 2000); // Simulate a network call with 2 seconds delay
+  };
+
   return (
     <div>
-      {/* Cart Icon Button */}
       <div
         style={{
           position: "absolute",
@@ -291,7 +288,7 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
             position: "absolute",
             top: 60,
             right: 20,
-            backgroundColor: "#fff",
+            backgroundColor: "white",
             padding: "20px",
             borderRadius: "10px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -318,11 +315,10 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
             >
               Your Cart
             </h3>
-
             <button
               style={{
                 cursor: "pointer",
-                background: "#008081",
+                background: "black",
                 borderRadius: "20px",
                 borderWidth: "10px",
                 borderStyle: "solid",
@@ -363,7 +359,7 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
                       {item.title}
                     </span>
                     <span style={{ color: "#888" }}>
-                      {item.price} x {item.quantity}{" "}
+                      {item.price} x {item.quantity}
                     </span>
                   </div>
 
@@ -381,7 +377,7 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
                           padding: "5px 10px",
                           fontSize: "16px",
                           borderRadius: "5px",
-                          backgroundColor: "#008081",
+                          backgroundColor: "black",
                           border: "1px solid #ccc",
                           cursor: "pointer",
                           marginRight: "10px",
@@ -390,13 +386,12 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
                       >
                         -
                       </button>
-
                       <button
                         style={{
                           padding: "5px 10px",
                           fontSize: "16px",
                           borderRadius: "5px",
-                          backgroundColor: "#008081",
+                          backgroundColor: "black",
                           border: "1px solid #ccc",
                           cursor: "pointer",
                           marginRight: "10px",
@@ -412,7 +407,7 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
                         padding: "5px 10px",
                         fontSize: "14px",
                         borderRadius: "5px",
-                        backgroundColor: "#008081",
+                        backgroundColor: "black",
                         border: "none",
                         color: "white",
                         cursor: "pointer",
@@ -424,8 +419,9 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
                   </div>
                 </li>
               ))}
-            </ul>     
+            </ul>
           )}
+
           <div
             style={{
               marginTop: "15px",
@@ -433,26 +429,34 @@ const Cart = ({ cart, onIncrement, onDecrement, onDelete }) => {
               justifyContent: "space-between",
               alignItems: "center",
               padding: "10px 0",
-              // borderTop: "1px solid #ddd",
             }}
           >
             <span style={{ fontWeight: "bold", fontSize: "16px" }}>
               Total: ${calculateTotal()}
             </span>
-            <button
-              style={{
-                padding: "8px 16px",
-                fontSize: "16px",
-                borderRadius: "5px",
-                backgroundColor: "#909090",
-                border: "none",
-                color: "white",
-                cursor: "pointer",
-              }}
-              onClick={() => alert('Proceed to Checkout')}
-            >
-              Buy Now
-            </button>
+            {isLoading ? (
+              <div>Loading...</div>
+            ) : showToast ? (
+              <span style={{ color: "#4CAF50", fontSize: "16px" }}>
+                Payment Successful
+              </span>
+            ) : (
+              <button
+                style={{
+                  padding: "8px 16px",
+                  fontSize: "16px",
+                  borderRadius: "5px",
+                  backgroundColor: "#909090",
+                  border: "none",
+                  color: "white",
+                  cursor: "pointer",
+                }}
+                onClick={handleBuyNow}
+                disabled={cart.length === 0} // Disable button if cart is empty
+              >
+                Buy Now
+              </button>
+            )}
           </div>
         </div>
       )}
@@ -473,7 +477,7 @@ const Rig = () => {
 
 const GradientBackground = () => {
   const { scene } = useThree();
-  scene.background = new Color("#008081"); // Dark grey background
+  scene.background = new Color("#008081");
   return null;
 };
 
@@ -482,17 +486,17 @@ function Collection() {
   const { category } = useParams();
   const selectedArtPieces = ART_PIECES[category] || [];
   console.log("this is my category -> ", category);
-  
+
   const [cart, setCart] = useState([]);
   useEffect(() => {
-    const savedCart = localStorage.getItem('cart');
+    const savedCart = localStorage.getItem("cart");
     if (savedCart) {
       setCart(JSON.parse(savedCart));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   const handleAddToCart = (item) => {
@@ -541,8 +545,13 @@ function Collection() {
     <>
       <button
         className="back-button"
-        onClick={() => navigate('/')}  // Navigate directly to the landing page
-        style={{ position: 'absolute', top: '20px', left: '20px', zIndex: 1000 }}
+        onClick={() => navigate("/")}
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          zIndex: 1000,
+        }}
       >
         <IoArrowBack size={25} /> Back
       </button>
@@ -561,6 +570,7 @@ function Collection() {
       </Canvas>
       <Cart
         cart={cart}
+        setCart={setCart}
         onIncrement={handleIncrement}
         onDecrement={handleDecrement}
         onDelete={handleDelete}

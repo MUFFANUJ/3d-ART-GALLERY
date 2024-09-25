@@ -1,26 +1,23 @@
-import React from 'react';
+import React from "react";
 // import 'dotenv/config';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import { CartProvider } from './component/page/landing/header/cartContext';
-import { ClerkProvider } from '@clerk/clerk-react'
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import { ClerkProvider } from "@clerk/clerk-react";
 // import reportWebVitals from './reportWebVitals';
 
-const PUBLISHABLE_KEY = "pk_test_cHJpbWUtcmluZ3RhaWwtMjIuY2xlcmsuYWNjb3VudHMuZGV2JA"
+const PUBLISHABLE_KEY =
+  "pk_test_cHJpbWUtcmluZ3RhaWwtMjIuY2xlcmsuYWNjb3VudHMuZGV2JA";
 
 if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key")
+  throw new Error("Missing Publishable Key");
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-    <CartProvider> {/* Wrap App in CartProvider */}
       <App />
-    </CartProvider>
     </ClerkProvider>
   </React.StrictMode>
 );
-

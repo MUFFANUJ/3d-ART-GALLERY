@@ -7,10 +7,10 @@ import Footer from "./footer/footer";
 const LandingPage = () => {
   return (
     <div>
-      <Header/>
-      <Topsection/>
-      <BottomSection/>
-      <Footer/>
+      <Header />
+      <Topsection />
+      <BottomSection />
+      <Footer />
     </div>
   );
 };

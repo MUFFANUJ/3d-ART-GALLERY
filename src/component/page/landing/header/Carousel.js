@@ -16,15 +16,21 @@ const Carousel = ({ slides }) => {
     <div className="carousel-container">
       <div className="carousel-content-wrapper">
         {slides.map((slide, index) => (
-          <div className={index === current ? "slide active" : "slide"} key={index}>
+          <div
+            className={index === current ? "slide active" : "slide"}
+            key={index}
+          >
             {index === current && (
               <div className="slide-container">
-                <img src={slide.image} alt={slide.title} className="slide-image"/>
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="slide-image"
+                />
                 <div className="text-container">
                   <h2>{slide.title}</h2>
                   <h4>{slide.artist}</h4>
                   <p>{slide.story}</p>
-                  <button className="shop-now-btn">Shop Now</button>
                 </div>
               </div>
             )}
@@ -45,4 +51,3 @@ const Carousel = ({ slides }) => {
 };
 
 export default Carousel;
-

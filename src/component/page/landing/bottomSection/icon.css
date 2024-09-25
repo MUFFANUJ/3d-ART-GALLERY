@@ -1,10 +1,10 @@
 .icon-container {
   display: flex;
   justify-content: space-between;
-  align-items: center; 
+  align-items: center;
   width: 100%;
-  max-width: 1200px; 
-  margin: 0 auto; 
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 40px 20px;
   text-align: center;
 }
@@ -13,13 +13,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1; 
+  flex: 1;
   padding: 20px;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
 }
 
 .icon {
-  font-size: 48px; 
+  font-size: 48px;
   margin-bottom: 20px;
   color: black;
 }
@@ -33,7 +33,7 @@
 .icon-box p {
   font-size: 14px;
   color: #555;
-  max-width: 250px; 
+  max-width: 250px;
 }
 
 @media (max-width: 768px) {
@@ -67,7 +67,7 @@
   }
 
   .icon {
-    font-size: 36px; 
+    font-size: 36px;
   }
 
   .icon-box h2 {
@@ -79,4 +79,3 @@
     max-width: 100%;
   }
 }
-

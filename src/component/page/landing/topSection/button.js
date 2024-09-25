@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import './button.css';
+import "./button.css";
 
 const Button = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate('/gallery');
+    navigate("/gallery");
   };
 
   return (
@@ -19,5 +19,3 @@ const Button = () => {
 };
 
 export default Button;
-
-

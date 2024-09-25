@@ -45,48 +45,10 @@
   box-sizing: border-box;
   border-radius: 20px;
   background-color: rgba(100, 100, 100, 0.5);
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 24px;
   font-weight: bold;
   line-height: 1.3;
-}
-
-@media (max-width: 768px) {
-  .text-container {
-    font-size: 18px;
-    padding: 15px;
-  }
-
-  .shop-now-btn {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .text-container {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .shop-now-btn {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-}
-
-
-.shop-now-btn {
-  padding: 10px 20px;
-  background-color: #fff;
-  color: #333;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.shop-now-btn:hover {
-  background-color: #ddd;
 }
 
 .carousel-indicators {
@@ -111,6 +73,26 @@
   background-color: #333;
 }
 
-.text-container p {
-  color: balck;
+@media (max-width: 768px) {
+  .text-container {
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  .shop-now-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-container {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .shop-now-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
 }
