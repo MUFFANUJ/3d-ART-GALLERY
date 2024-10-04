@@ -21,59 +21,59 @@ const ART_PIECES = {
   nature: [
     {
       title: "Flowers And Fruits",
-      imgPath: "assests/images/naturepalete/n1.webp",
+      imgPath: "/assests/images/naturepalete/n1.webp",
       price: 2610,
     },
     {
       title: "Graphic Botanical Mini",
-      imgPath: "assests/images/naturepalete/n2.webp",
+      imgPath: "/assests/images/naturepalete/n2.webp",
       price: 6750,
     },
     {
       title: "Green Twig No 3",
-      imgPath: "assests/images/naturepalete/n4.webp",
+      imgPath: "/assests/images/naturepalete/n4.webp",
       price: 3770,
     },
     {
       title: "Flowers And Fruits",
-      imgPath: "assests/images/naturepalete/n1.webp",
+      imgPath: "/assests/images/naturepalete/n1.webp",
       price: 2610,
     },
     {
       title: "Graphic Botanical Mini",
-      imgPath: "assests/images/naturepalete/n2.webp",
+      imgPath: "/assests/images/naturepalete/n2.webp",
       price: 6750,
     },
     {
       title: "Green Twig No 3",
-      imgPath: "assests/images/naturepalete/n4.webp",
+      imgPath: "/assests/images/naturepalete/n4.webp",
       price: 3770,
     },
     {
       title: "Flowers And Fruits",
-      imgPath: "assests/images/naturepalete/n1.webp",
+      imgPath: "/assests/images/naturepalete/n1.webp",
       price: 2610,
     },
   ],
   pichwai: [
     {
       title: "Beautiful Beast",
-      imgPath: "assests/images/pichwai/p1.webp",
+      imgPath: "/assests/images/pichwai/p1.webp",
       price: 3770,
     },
     {
       title: "Stillness",
-      imgPath: "assests/images/pichwai/p2.webp",
+      imgPath: "/assests/images/pichwai/p2.webp",
       price: 3770,
     },
     {
       title: "Foxy",
-      imgPath: "assests/images/pichwai/p3.webp",
+      imgPath: "/assests/images/pichwai/p3.webp",
       price: 3330,
     },
     {
       title: "Gentle Giant",
-      imgPath: "assests/images/pichwai/p4.webp",
+      imgPath: "/assests/images/pichwai/p4.webp",
       price: 3770,
     },
     {
@@ -83,12 +83,12 @@ const ART_PIECES = {
     },
     {
       title: "Lonely Together",
-      imgPath: "assests/images/pichwai/p6.webp",
+      imgPath: "/assests/images/pichwai/p6.webp",
       price: 2080,
     },
     {
       title: "Owl",
-      imgPath: "assests/images/pichwai/p7.webp",
+      imgPath: "/assests/images/pichwai/p7.webp",
       price: 2410,
     },
   ],
