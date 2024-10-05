@@ -78,7 +78,7 @@ const ART_PIECES = {
     },
     {
       title: "Purity",
-      imgPath: "assests/images/pichwai/p5.webp",
+      imgPath: "/assests/images/pichwai/p5.webp",
       price: 2410,
     },
     {
