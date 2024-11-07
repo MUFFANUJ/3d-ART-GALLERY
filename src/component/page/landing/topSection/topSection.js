@@ -7,7 +7,7 @@ const Topsection = () => {
   const navigate = useNavigate();
 
   const handleClick = (category) => {
-    navigate(`/collection/${category}`);
+    navigate(`/gallery/${category}`);
   };
 
   return (

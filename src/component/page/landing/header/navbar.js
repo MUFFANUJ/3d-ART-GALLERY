@@ -1,13 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { IoCartOutline } from 'react-icons/io5';
-import './navbar.css';
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
+import React, { useState, useEffect } from "react";
+import { IoCartOutline,IoPersonOutline, IoLogOutOutline  } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+import "./navbar.css";
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cart, setCart] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
+
+  const navigate = useNavigate();
+
+  //localstorge
+
+  const user=localStorage.getItem('user');
+  const parsedUser = user ? JSON.parse(user) : null;
+
+  const userName = parsedUser ? parsedUser.name : null; 
+  const userRole = parsedUser ? parsedUser.role : null;
+console.log("this is the user on navbar -> ",user);
 
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -16,7 +27,9 @@ const Navbar = () => {
   const handleIncrement = (item) => {
     setCart((prevCart) =>
       prevCart.map((cartItem) =>
-        cartItem.title === item.title ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+        cartItem.title === item.title
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
       )
     );
   };
@@ -24,13 +37,17 @@ const Navbar = () => {
   const handleDecrement = (item) => {
     setCart((prevCart) =>
       prevCart.map((cartItem) =>
-        cartItem.title === item.title && cartItem.quantity > 1 ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+        cartItem.title === item.title && cartItem.quantity > 1
+          ? { ...cartItem, quantity: cartItem.quantity - 1 }
+          : cartItem
       )
     );
   };
 
   const handleDelete = (item) => {
-    setCart((prevCart) => prevCart.filter((cartItem) => cartItem.title !== item.title));
+    setCart((prevCart) =>
+      prevCart.filter((cartItem) => cartItem.title !== item.title)
+    );
     setShowToast(true);
     setTimeout(() => setShowToast(false), 2000); // Toast shows for 2 seconds
   };
@@ -55,6 +72,11 @@ const Navbar = () => {
     }, 2000); // Simulate a delay for the purchase
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
     if (savedCart) {
@@ -64,32 +86,72 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className='header'>
-        <img src='/assests/images/mainlogo.png' alt='Kalakriti' className='logo' />
-        <div className='nav-icons'>
-          <div className='nav-icon'>
-            <SignedOut>
-              <SignInButton style={{
-                backgroundColor: '#f0f0f0',
-                color: '#333',
-                padding: '5px 10px',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontSize: '14px'
-              }} />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </div>
-          <div className='nav-icon' onClick={() => {setIsCartOpen(!isCartOpen);}}>
-            <IoCartOutline />
-            <span>Cart {cart.length}</span>
+      <nav className="header">
+        <img
+          src="/assests/images/mainlogo.png"
+          alt="Kalakriti"
+          className="logo"
+        />
+         <div className="nav-icons">
+          {userName ? (
+            <div className="nav-icon">
+              <IoPersonOutline /> 
+              <span>{userName}</span> 
+              {userRole === "admin" && (
+                <button
+                  className="manage-product-button"
+                  onClick={() => navigate("/admin/manage-products")}
+                  style={{
+                    marginLeft: "10px",
+                    backgroundColor: "green",
+                    color: "white",
+                    border: "none",
+                    padding: "5px 10px",
+                    cursor: "pointer",
+                    fontSize: "14px",
+                  }}
+                >
+                  Manage Products
+                </button>
+              )}
+              <button
+                className="logout-button"
+                onClick={handleLogout}
+                style={{
+                  marginLeft: "17px",
+                  backgroundColor: "red",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "2px",
+                  padding: "4px 10px",
+                  cursor: "pointer",
+                  fontSize: "14px",
+                }}
+              >
+                <IoLogOutOutline /> Log Out
+              </button>
+            </div>
+          ) : (
+            <div className="nav-icon" onClick={() => navigate("/signup")}>
+              <IoPersonOutline />
+              <span>Signup</span>
+            </div>
+          )}
 
-          </div>
+        {userRole !== "admin" && (
+            <div
+              className="nav-icon"
+              onClick={() => {
+                setIsCartOpen(!isCartOpen);
+              }}
+            >
+              <IoCartOutline />
+              <span>Cart {cart.length}</span>
+            </div>
+          )}
         </div>
       </nav>
+
       {isCartOpen && (
         <div
           className="cart"
@@ -97,7 +159,7 @@ const Navbar = () => {
             position: "absolute",
             top: 60,
             right: 20,
-            zIndex:10,
+            zIndex: 10,
             backgroundColor: "white",
             padding: "20px",
             borderRadius: "10px",
@@ -241,7 +303,7 @@ const Navbar = () => {
               padding: "10px 0",
             }}
           >
-            <span style={{ fontWeight: 'bold', fontSize: '16px' }}>
+            <span style={{ fontWeight: "bold", fontSize: "16px" }}>
               Total: ${calculateTotal()}
             </span>
             {isLoading ? (

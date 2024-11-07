@@ -1,5 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./component/page/Authentication/Login";
+import SignUp from "./component/page/Authentication/Signup"; 
+
 import Gallery from "./Gallery";
 import LandingPage from "./component/page/landing/landingpage";
 import Collection from "./component/page/landing/collection";
@@ -12,13 +15,15 @@ import "./App.css";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/collection/:category" element={<Collection />} />
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/gallery/:category" element={<Gallery />} />
+          <Route path="/collection/:category" element={<Collection />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Routes>
+      </Router>
   );
 }
 

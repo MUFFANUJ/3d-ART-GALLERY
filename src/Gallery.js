@@ -1,6 +1,6 @@
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import React, { Suspense, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   SpotLight,
   Text,
@@ -15,60 +15,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { IoArrowBack } from "react-icons/io5";
 import "./Gallery.css";
+import ENDPOINT from "./helpers/constants";
 
-const ART_PIECES = [
-  {
-    title: "Flowers And Fruits",
-    imgPath: "assests/images/naturepalete/n1.webp",
-    price: " 2610",
-  },
-  {
-    title: "Graphic Botanical Mini",
-    imgPath: "assests/images/naturepalete/n2.webp",
-    price: " 6750",
-  },
-  {
-    title: "Green Twig No 3",
-    imgPath: "assests/images/naturepalete/n4.webp",
-    price: " 3770",
-  },
-  {
-    title: "Beautiful Beast",
-    imgPath: "assests/images/pichwai/p1.webp",
-    price: " 3770",
-  },
-  {
-    title: "Stillness",
-    imgPath: "assests/images/pichwai/p2.webp",
-    price: " 3770",
-  },
-  { title: "Foxy", imgPath: "assests/images/pichwai/p3.webp", price: " 3330" },
-  {
-    title: "Gentle Giant",
-    imgPath: "assests/images/pichwai/p4.webp",
-    price: " 3770",
-  },
-  {
-    title: "Purity",
-    imgPath: "assests/images/pichwai/p5.webp",
-    price: " 2410",
-  },
-  {
-    title: "Lonely Together",
-    imgPath: "assests/images/pichwai/p6.webp",
-    price: "₹ 2080",
-  },
-  { title: "Owl", imgPath: "assests/images/pichwai/p7.webp", price: " 2410" },
-];
 
 const WallArt = (props) => {
-  console.log("this is props in wallArt -> ", props);
   const { art, i, addToCart } = props;
   const { width: w, height: h } = useThree((state) => state.viewport);
   const gap = 2;
   const imageWidth = 3;
   const imageHeight = h / 2;
-  const texture = useLoader(TextureLoader, art.imgPath);
+  const texture = useLoader(TextureLoader, art.imageUrl);
 
   const xPosition = (i + 1) * (imageWidth + gap) + (i + 1);
   const baseYPosition = 0;
@@ -77,7 +33,7 @@ const WallArt = (props) => {
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
-    console.log(`Adding ${art.title} to cart`);
+    console.log(`Adding ${art.name} to cart`);
     addToCart(art);
   };
 
@@ -116,7 +72,7 @@ const WallArt = (props) => {
         font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
         maxWidth={imageWidth}
       >
-        {art.title} - {`$${art.price}`}
+        {art.name} - {`$${art.price}`}
       </Text>
       <mesh
         position={[xPosition, yPositionButton, 0]}
@@ -142,11 +98,43 @@ const WallArt = (props) => {
   );
 };
 
-const Scene = ({ addToCart }) => {
-  console.log("this is add to cart in -> ", addToCart);
+const Scene = ({ addToCart,category }) => {
+
+  console.log("this is category in scene  -> ",category);
+
+const [ART_PIECES, SetART_PIECES]=useState([]);
+
   const { width: screenWidth } = useThree((state) => state.viewport);
   console.log("screenWidth", screenWidth);
   const textScale = screenWidth < 5.5 ? 2 : 4;
+
+  useEffect(()=>{
+    console.log("this is gallery : ")
+    const getAll=async()=>{
+      const response = await fetch(`${ENDPOINT}/api/products/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(),
+      });
+
+      const res=await response.json();
+
+      if(category==='all'){
+        SetART_PIECES(res);
+      }else{
+        const byCategory=res.filter((ele,idx)=>{
+          return ele.category===category;
+        })
+
+        SetART_PIECES(byCategory);
+      }
+    }
+
+    getAll();
+  },[category]);
+
 
   return (
     <Suspense
@@ -333,7 +321,7 @@ const Cart = ({ cart, setCart, onIncrement, onDecrement, onDelete }) => {
                     }}
                   >
                     <span style={{ fontWeight: "bold", fontSize: "16px" }}>
-                      {item.title}
+                      {item.name}
                     </span>
                     <span style={{ color: "#888" }}>
                       {item.price} x {item.quantity}
@@ -350,7 +338,7 @@ const Cart = ({ cart, setCart, onIncrement, onDecrement, onDelete }) => {
                   >
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <button
-                        style={{
+                          style={{
                           padding: "5px 10px",
                           fontSize: "16px",
                           borderRadius: "5px",
@@ -458,9 +446,13 @@ const GradientBackground = () => {
   return null;
 };
 
-function App() {
+function Gallery() {
   const navigate = useNavigate();
+  const { category } = useParams();
+  console.log("this is my category -> ", category);
   const [cart, setCart] = useState([]);
+
+  const user=localStorage.getItem('user');
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -473,26 +465,51 @@ function App() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const handleAddToCart = (item) => {
+  const handleAddToCart = async(item) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find(
-        (cartItem) => cartItem.title === item.title
+        (cartItem) => cartItem.name === item.name
       );
       if (existingItem) {
         return prevCart.map((cartItem) =>
-          cartItem.title === item.title
+          cartItem.name === item.name
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem
         );
       }
       return [...prevCart, { ...item, quantity: 1 }];
     });
+
+    try {
+
+      
+      const bodyd=JSON.stringify({userId:JSON.parse(user).id,productId:item.id, quantity:1});
+      console.log("this is the userId and productId -> ",bodyd);
+
+      const response = await fetch(`${ENDPOINT}/api/cart/add`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: bodyd
+      });
+
+      if (response.ok) {
+          alert('Product added successfully!');
+      } else {
+          alert('Failed to add product');
+      }
+  } catch (error) {
+      console.error('Error adding product:', error);
+      alert('Failed to add product');
+  }
+
   };
 
   const handleIncrement = (item) => {
     setCart((prevCart) =>
       prevCart.map((cartItem) =>
-        cartItem.title === item.title
+        cartItem.name === item.name
           ? { ...cartItem, quantity: cartItem.quantity + 1 }
           : cartItem
       )
@@ -502,7 +519,7 @@ function App() {
   const handleDecrement = (item) => {
     setCart((prevCart) =>
       prevCart.map((cartItem) =>
-        cartItem.title === item.title && cartItem.quantity > 1
+        cartItem.name === item.name && cartItem.quantity > 1
           ? { ...cartItem, quantity: cartItem.quantity - 1 }
           : cartItem
       )
@@ -511,7 +528,7 @@ function App() {
 
   const handleDelete = (item) => {
     setCart((prevCart) =>
-      prevCart.filter((cartItem) => cartItem.title !== item.title)
+      prevCart.filter((cartItem) => cartItem.name !== item.name)
     );
   };
 
@@ -537,7 +554,7 @@ function App() {
           <Vignette eskil={false} offset={0.1} darkness={0.5} />
         </EffectComposer>
         <Rig />
-        <Scene addToCart={handleAddToCart} />
+        <Scene addToCart={handleAddToCart} category={category} />
       </Canvas>
       <Cart
         cart={cart}
@@ -550,4 +567,4 @@ function App() {
   );
 }
 
-export default App;
+export default Gallery;

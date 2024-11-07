@@ -6,7 +6,7 @@ const Button = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
-    navigate("/gallery");
+    navigate("/gallery/all");
   };
 
   return (
