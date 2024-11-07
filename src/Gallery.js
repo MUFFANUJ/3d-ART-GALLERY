@@ -451,6 +451,7 @@ function Gallery() {
   const { category } = useParams();
   console.log("this is my category -> ", category);
   const [cart, setCart] = useState([]);
+  const [cartId,setCartId] = useState();
 
   const user=localStorage.getItem('user');
 
@@ -490,9 +491,14 @@ function Gallery() {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
+              "Authorization":`${localStorage.getItem("token")}`
           },
-          body: bodyd
+          body: bodyd,
+        
       });
+      const data = await response.json()
+      console.log(data)
+      setCartId(data.cartItem.cartId)
 
       if (response.ok) {
           alert('Product added successfully!');
@@ -506,7 +512,22 @@ function Gallery() {
 
   };
 
-  const handleIncrement = (item) => {
+  const handleIncrement = async(item) => {
+    const response = await fetch(`${ENDPOINT}/api/cart/increment`, {
+      method: 'PATCH',
+      headers: {
+          'Content-Type': 'application/json',
+          "Authorization":`${localStorage.getItem("token")}`
+      },
+      body: JSON.stringify({ productId: item.id,cartId : cartId}) ,
+  });
+  
+
+  if (response.ok) {
+      alert('Product incremented successfully!');
+  } else {
+      alert('Failed to increment product');
+  }
     setCart((prevCart) =>
       prevCart.map((cartItem) =>
         cartItem.name === item.name
@@ -516,7 +537,22 @@ function Gallery() {
     );
   };
 
-  const handleDecrement = (item) => {
+  const handleDecrement = async(item) => {
+    const response = await fetch(`${ENDPOINT}/api/cart/decrement`, {
+      method: 'PATCH',
+      headers: {
+          'Content-Type': 'application/json',
+          "Authorization":`${localStorage.getItem("token")}`
+      },
+      body: JSON.stringify({ productId: item.id,cartId : cartId}) ,
+  });
+  
+
+  if (response.ok) {
+      alert('Product decremented successfully!');
+  } else {
+      alert('Failed to decrement product');
+  }
     setCart((prevCart) =>
       prevCart.map((cartItem) =>
         cartItem.name === item.name && cartItem.quantity > 1
@@ -526,10 +562,27 @@ function Gallery() {
     );
   };
 
-  const handleDelete = (item) => {
+  const handleDelete = async(item) => {
+    
+    const response = await fetch(`${ENDPOINT}/api/cart/remove`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization":`${localStorage.getItem("token")}`
+      },
+      body: JSON.stringify({ productId: item.id, cartId : cartId}) 
+      
+    });
+    console.log("carttt",cartId)
+    console.log("carttt",item.id)
     setCart((prevCart) =>
       prevCart.filter((cartItem) => cartItem.name !== item.name)
     );
+  if (response.ok) {
+      alert('Product deleted successfully!');
+  } else {
+      alert('Failed to delete product');
+  }
   };
 
   return (

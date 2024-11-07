@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { IoCartOutline,IoPersonOutline, IoLogOutOutline  } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+// import ENDPOINT from "../../../../helpers/constants";
 import "./navbar.css";
 
 const Navbar = () => {
@@ -228,7 +229,7 @@ console.log("this is the user on navbar -> ",user);
                     }}
                   >
                     <span style={{ fontWeight: "bold", fontSize: "16px" }}>
-                      {item.title}
+                      {item.name}
                     </span>
                     <span style={{ color: "#888" }}>
                       {item.price} x {item.quantity}
