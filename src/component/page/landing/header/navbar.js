@@ -5,31 +5,31 @@ import {
   IoLogOutOutline,
 } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-// import ENDPOINT from "../../../../helpers/constants";
+import ENDPOINT from "../../../../helpers/constants";  // Ensure your endpoint is correct
 import "./navbar.css";
-import ENDPOINT from "../../../../helpers/constants";
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([]);  // Initialize cart as an empty array
   const [isLoading, setIsLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
   const navigate = useNavigate();
 
-  //localstorge
-
+  // Get user data from localStorage
   const user = localStorage.getItem("user");
   const parsedUser = user ? JSON.parse(user) : null;
-
   const userName = parsedUser ? parsedUser.name : null;
   const userRole = parsedUser ? parsedUser.role : null;
-  console.log("this is the user on navbar -> ", user);
 
+  console.log("This is the user on navbar -> ", user);
+
+  // Calculate total price of cart
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
+  // Handle increment of item quantity in the cart
   const handleIncrement = (item) => {
     setCart((prevCart) =>
       prevCart.map((cartItem) =>
@@ -40,6 +40,7 @@ const Navbar = () => {
     );
   };
 
+  // Handle decrement of item quantity in the cart
   const handleDecrement = (item) => {
     setCart((prevCart) =>
       prevCart.map((cartItem) =>
@@ -50,6 +51,7 @@ const Navbar = () => {
     );
   };
 
+  // Handle removal of an item from the cart
   const handleDelete = (item) => {
     setCart((prevCart) =>
       prevCart.filter((cartItem) => cartItem.title !== item.title)
@@ -58,10 +60,12 @@ const Navbar = () => {
     setTimeout(() => setShowToast(false), 2000); // Toast shows for 2 seconds
   };
 
+  // Clear the cart
   const clearCart = () => {
     setCart([]);
   };
 
+  // Handle Buy Now action
   const handleBuyNow = async () => {
     if (cart.length === 0) {
       alert("Your cart is empty!");
@@ -78,18 +82,21 @@ const Navbar = () => {
     }, 2000); // Simulate a delay for the purchase
   };
 
+  // Handle user logout
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/");
   };
 
+  // Fetch cart items from the API if the user is logged in
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
     if (savedCart) {
       setCart(JSON.parse(savedCart));
     }
 
-    const token=localStorage.getItem("token")
+    // Fetch cart details if a user is logged in
+    const token = localStorage.getItem("token");
     async function getDetails() {
       const response = await fetch(`${ENDPOINT}/api/cart/getCartItems`, {
         method: "GET",
@@ -99,12 +106,16 @@ const Navbar = () => {
         },
       });
 
-      const data=await response.json();
-      setCart(data.items);
-      console.log("this is the cart items :",data.items);
+      const data = await response.json();
+      setCart(data.items || []);  // Ensure cart is set to an array, even if the response is empty
+      console.log("This is the cart items:", data.items);
     }
-    getDetails();
-  }, []);
+
+    // Only fetch cart details if the user is logged in
+    if (user && token) {
+      getDetails();
+    }
+  }, [user]); // We only re-run this effect when 'user' changes
 
   return (
     <div>
@@ -161,7 +172,8 @@ const Navbar = () => {
             </div>
           )}
 
-          {userRole !== "admin" && (
+          {/* Conditionally render Cart Icon if user is logged in */}
+          {user && cart.length !== 0 && (
             <div
               className="nav-icon"
               onClick={() => {
