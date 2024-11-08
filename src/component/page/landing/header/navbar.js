@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { IoCartOutline,IoPersonOutline, IoLogOutOutline  } from "react-icons/io5";
+import {
+  IoCartOutline,
+  IoPersonOutline,
+  IoLogOutOutline,
+} from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 // import ENDPOINT from "../../../../helpers/constants";
 import "./navbar.css";
+import ENDPOINT from "../../../../helpers/constants";
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -14,12 +19,12 @@ const Navbar = () => {
 
   //localstorge
 
-  const user=localStorage.getItem('user');
+  const user = localStorage.getItem("user");
   const parsedUser = user ? JSON.parse(user) : null;
 
-  const userName = parsedUser ? parsedUser.name : null; 
+  const userName = parsedUser ? parsedUser.name : null;
   const userRole = parsedUser ? parsedUser.role : null;
-console.log("this is the user on navbar -> ",user);
+  console.log("this is the user on navbar -> ", user);
 
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -83,6 +88,22 @@ console.log("this is the user on navbar -> ",user);
     if (savedCart) {
       setCart(JSON.parse(savedCart));
     }
+
+    const token=localStorage.getItem("token")
+    async function getDetails() {
+      const response = await fetch(`${ENDPOINT}/api/cart/getCartItems`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      });
+
+      const data=await response.json();
+      setCart(data.items);
+      console.log("this is the cart items :",data.items);
+    }
+    getDetails();
   }, []);
 
   return (
@@ -92,16 +113,17 @@ console.log("this is the user on navbar -> ",user);
           src="/assests/images/mainlogo.png"
           alt="Kalakriti"
           className="logo"
+          onClick={() => navigate("/")}
         />
-         <div className="nav-icons">
+        <div className="nav-icons">
           {userName ? (
             <div className="nav-icon">
-              <IoPersonOutline /> 
-              <span>{userName}</span> 
+              <IoPersonOutline />
+              <span>{userName}</span>
               {userRole === "admin" && (
                 <button
                   className="manage-product-button"
-                  onClick={() => navigate("/admin/manage-products")}
+                  onClick={() => navigate("/admin")}
                   style={{
                     marginLeft: "10px",
                     backgroundColor: "green",
@@ -139,7 +161,7 @@ console.log("this is the user on navbar -> ",user);
             </div>
           )}
 
-        {userRole !== "admin" && (
+          {userRole !== "admin" && (
             <div
               className="nav-icon"
               onClick={() => {
@@ -229,10 +251,10 @@ console.log("this is the user on navbar -> ",user);
                     }}
                   >
                     <span style={{ fontWeight: "bold", fontSize: "16px" }}>
-                      {item.name}
+                      {item.productName}
                     </span>
                     <span style={{ color: "#888" }}>
-                      {item.price} x {item.quantity}
+                      {item.productPrice} x {item.quantity}
                     </span>
                   </div>
 

@@ -17,7 +17,6 @@ import { IoArrowBack } from "react-icons/io5";
 import "./Gallery.css";
 import ENDPOINT from "./helpers/constants";
 
-
 const WallArt = (props) => {
   const { art, i, addToCart } = props;
   const { width: w, height: h } = useThree((state) => state.viewport);
@@ -98,19 +97,18 @@ const WallArt = (props) => {
   );
 };
 
-const Scene = ({ addToCart,category }) => {
+const Scene = ({ addToCart, category }) => {
+  console.log("this is category in scene  -> ", category);
 
-  console.log("this is category in scene  -> ",category);
-
-const [ART_PIECES, SetART_PIECES]=useState([]);
+  const [ART_PIECES, SetART_PIECES] = useState([]);
 
   const { width: screenWidth } = useThree((state) => state.viewport);
   console.log("screenWidth", screenWidth);
   const textScale = screenWidth < 5.5 ? 2 : 4;
 
-  useEffect(()=>{
-    console.log("this is gallery : ")
-    const getAll=async()=>{
+  useEffect(() => {
+    console.log("this is gallery : ");
+    const getAll = async () => {
       const response = await fetch(`${ENDPOINT}/api/products/`, {
         method: "GET",
         headers: {
@@ -119,22 +117,21 @@ const [ART_PIECES, SetART_PIECES]=useState([]);
         body: JSON.stringify(),
       });
 
-      const res=await response.json();
+      const res = await response.json();
 
-      if(category==='all'){
+      if (category === "all") {
         SetART_PIECES(res);
-      }else{
-        const byCategory=res.filter((ele,idx)=>{
-          return ele.category===category;
-        })
+      } else {
+        const byCategory = res.filter((ele, idx) => {
+          return ele.category === category;
+        });
 
         SetART_PIECES(byCategory);
       }
-    }
+    };
 
     getAll();
-  },[category]);
-
+  }, [category]);
 
   return (
     <Suspense
@@ -195,7 +192,7 @@ const [ART_PIECES, SetART_PIECES]=useState([]);
   );
 };
 
-const Cart = ({ cart, setCart, onIncrement, onDecrement, onDelete }) => {
+export const Cart = ({ cart, setCart, onIncrement, onDecrement, onDelete }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -338,7 +335,7 @@ const Cart = ({ cart, setCart, onIncrement, onDecrement, onDelete }) => {
                   >
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <button
-                          style={{
+                        style={{
                           padding: "5px 10px",
                           fontSize: "16px",
                           borderRadius: "5px",
@@ -451,9 +448,9 @@ function Gallery() {
   const { category } = useParams();
   console.log("this is my category -> ", category);
   const [cart, setCart] = useState([]);
-  const [cartId,setCartId] = useState();
+  const [cartId, setCartId] = useState();
 
-  const user=localStorage.getItem('user');
+  const user = localStorage.getItem("user");
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -466,7 +463,7 @@ function Gallery() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const handleAddToCart = async(item) => {
+  const handleAddToCart = async (item) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find(
         (cartItem) => cartItem.name === item.name
@@ -482,52 +479,53 @@ function Gallery() {
     });
 
     try {
-
-      
-      const bodyd=JSON.stringify({userId:JSON.parse(user).id,productId:item.id, quantity:1});
-      console.log("this is the userId and productId -> ",bodyd);
+      const bodyd = JSON.stringify({
+        userId: JSON.parse(user).id,
+        productId: item.id,
+        quantity: 1,
+      });
+      console.log("this is the userId and productId -> ", bodyd);
 
       const response = await fetch(`${ENDPOINT}/api/cart/add`, {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-              "Authorization":`${localStorage.getItem("token")}`
-          },
-          body: bodyd,
-        
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+        body: bodyd,
       });
-      const data = await response.json()
-      console.log(data)
-      setCartId(data.cartItem.cartId)
+      const data = await response.json();
+      console.log(data);
+      setCartId(data.cartItem.cartId);
 
       if (response.ok) {
-          alert('Product added successfully!');
+        alert("Product added successfully!");
       } else {
-          alert('Failed to add product');
+        alert("Failed to add product");
       }
-  } catch (error) {
-      console.error('Error adding product:', error);
-      alert('Failed to add product');
-  }
-
+    } catch (error) {
+      console.error("Error adding product:", error);
+      alert("Failed to add product");
+    }
   };
 
-  const handleIncrement = async(item) => {
+  const handleIncrement = async (item) => {
     const response = await fetch(`${ENDPOINT}/api/cart/increment`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-          'Content-Type': 'application/json',
-          "Authorization":`${localStorage.getItem("token")}`
+        "Content-Type": "application/json",
+        Authorization: `${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({ productId: item.id,cartId : cartId}) ,
-  });
-  
+      body: JSON.stringify({ productId: item.id, cartId: cartId }),
+    });
 
-  if (response.ok) {
-      alert('Product incremented successfully!');
-  } else {
-      alert('Failed to increment product');
-  }
+    console.log("this is response -> ",{ productId: item.id, cartId: cartId })
+
+    if (response.ok) {
+      alert("Product incremented successfully!");
+    } else {
+      alert("Failed to increment product");
+    }
     setCart((prevCart) =>
       prevCart.map((cartItem) =>
         cartItem.name === item.name
@@ -537,22 +535,21 @@ function Gallery() {
     );
   };
 
-  const handleDecrement = async(item) => {
+  const handleDecrement = async (item) => {
     const response = await fetch(`${ENDPOINT}/api/cart/decrement`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-          'Content-Type': 'application/json',
-          "Authorization":`${localStorage.getItem("token")}`
+        "Content-Type": "application/json",
+        Authorization: `${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({ productId: item.id,cartId : cartId}) ,
-  });
-  
+      body: JSON.stringify({ productId: item.id, cartId: cartId }),
+    });
 
-  if (response.ok) {
-      alert('Product decremented successfully!');
-  } else {
-      alert('Failed to decrement product');
-  }
+    if (response.ok) {
+      alert("Product decremented successfully!");
+    } else {
+      alert("Failed to decrement product");
+    }
     setCart((prevCart) =>
       prevCart.map((cartItem) =>
         cartItem.name === item.name && cartItem.quantity > 1
@@ -562,27 +559,25 @@ function Gallery() {
     );
   };
 
-  const handleDelete = async(item) => {
-    
+  const handleDelete = async (item) => {
     const response = await fetch(`${ENDPOINT}/api/cart/remove`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
-        "Authorization":`${localStorage.getItem("token")}`
+        "Content-Type": "application/json",
+        Authorization: `${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({ productId: item.id, cartId : cartId}) 
-      
+      body: JSON.stringify({ productId: item.id, cartId: cartId }),
     });
-    console.log("carttt",cartId)
-    console.log("carttt",item.id)
+    console.log("carttt", cartId);
+    console.log("carttt", item.id);
     setCart((prevCart) =>
       prevCart.filter((cartItem) => cartItem.name !== item.name)
     );
-  if (response.ok) {
-      alert('Product deleted successfully!');
-  } else {
-      alert('Failed to delete product');
-  }
+    if (response.ok) {
+      alert("Product deleted successfully!");
+    } else {
+      alert("Failed to delete product");
+    }
   };
 
   return (

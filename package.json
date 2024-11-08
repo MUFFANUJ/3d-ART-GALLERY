@@ -2,7 +2,7 @@
   "name": "art-gallery",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3005",
+  "proxy": "https://threed-art-gallery-backend.onrender.com",
   "dependencies": {
     "@clerk/clerk-react": "^5.9.2",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
