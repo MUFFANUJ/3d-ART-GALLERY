@@ -16,6 +16,7 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { IoArrowBack } from "react-icons/io5";
 import "./Gallery.css";
 import ENDPOINT from "./helpers/constants";
+import LoadingImage from "./component/page/landing/LoadingScreen";
 
 const WallArt = (props) => {
   const { art, i, addToCart } = props;
@@ -101,6 +102,8 @@ const Scene = ({ addToCart, category }) => {
   console.log("this is category in scene  -> ", category);
 
   const [ART_PIECES, SetART_PIECES] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
 
   const { width: screenWidth } = useThree((state) => state.viewport);
   console.log("screenWidth", screenWidth);
@@ -109,7 +112,7 @@ const Scene = ({ addToCart, category }) => {
   useEffect(() => {
     console.log("this is gallery : ");
     const getAll = async () => {
-      const response = await fetch(`${ENDPOINT}/api/products/`, {
+      const response =await fetch(`${ENDPOINT}/api/products/`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -118,11 +121,15 @@ const Scene = ({ addToCart, category }) => {
       });
 
       const res = await response.json();
+      console.log("this is the response -> ",res);
+     
 
       if (category === "all") {
         SetART_PIECES(res);
+        setIsLoading(false);
       } else {
         const byCategory = res.filter((ele, idx) => {
+          setIsLoading(false);
           return ele.category === category;
         });
 
@@ -131,64 +138,79 @@ const Scene = ({ addToCart, category }) => {
     };
 
     getAll();
-  }, [category]);
+  }, [category,isLoading]);
+
+  const dummy={
+    id:1,
+    name:"This is loading screen",
+    imageUrl:"https://mir-s3-cdn-cf.behance.net/project_modules/hd/b6e0b072897469.5bf6e79950d23.gif",
+    category:"nature",
+    price:50,
+    stock:10
+  }
 
   return (
-    <Suspense
-      fallback={
-        <Html
-          style={{ fontSize: "6vw", whiteSpace: "nowrap", color: "white" }}
-          center
+    <>
+      {isLoading ? (
+         <LoadingImage imageUrl={dummy.imageUrl}/>
+      ) : (
+        <Suspense
+          fallback={
+            <Html
+              style={{ fontSize: "6vw", whiteSpace: "nowrap", color: "white" }}
+              center
+            >
+              Loading 3D Art Gallery...
+            </Html>
+          }
         >
-          Loading 3D Art Gallery...
-        </Html>
-      }
-    >
-      <ScrollControls
-        infinite
-        horizontal
-        damping={4}
-        pages={28 * Math.exp(-0.11 * screenWidth)}
-        distance={1}
-      >
-        <Scroll>
-          <Text
-            position-z={0}
-            anchorX="center"
-            anchorY="bottom"
-            scale={[textScale, textScale, textScale]}
-            color="#94A6FF"
-            font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
-            castShadow
+          <ScrollControls
+            infinite
+            horizontal
+            damping={4}
+            pages={28 * Math.exp(-0.11 * screenWidth)}
+            distance={1}
           >
-            Creativity is allowing yourself to make mistakes.
-          </Text>
-          <Text
-            position-z={1}
-            anchorX="center"
-            anchorY="top"
-            scale={[textScale, textScale, textScale]}
-            color="#FBA90A"
-            font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
-            castShadow
-          >
-            Art is knowing which ones to keep.
-          </Text>
-          <Text
-            position={[0, -0.5, 1.5]}
-            anchorX="center"
-            anchorY="top"
-            font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
-          >
-            ~ Scott Adams
-          </Text>
+            <Scroll>
+              <Text
+                position-z={0}
+                anchorX="center"
+                anchorY="bottom"
+                scale={[textScale, textScale, textScale]}
+                color="#94A6FF"
+                font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
+                castShadow
+              >
+                Creativity is allowing yourself to make mistakes.
+              </Text>
+              <Text
+                position-z={1}
+                anchorX="center"
+                anchorY="top"
+                scale={[textScale, textScale, textScale]}
+                color="#FBA90A"
+                font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
+                castShadow
+              >
+                Art is knowing which ones to keep.
+              </Text>
+              <Text
+                position={[0, -0.5, 1.5]}
+                anchorX="center"
+                anchorY="top"
+                font="https://fonts.gstatic.com/s/sacramento/v5/buEzpo6gcdjy0EiZMBUG4C0f-w.woff"
+              >
+                ~ Scott Adams
+              </Text>
 
-          {ART_PIECES.map((art, i) => (
-            <WallArt key={i} i={i} art={art} addToCart={addToCart} />
-          ))}
-        </Scroll>
-      </ScrollControls>
-    </Suspense>
+              {ART_PIECES.map((art, i) => (
+                <WallArt key={i} i={i} art={art} addToCart={addToCart} />
+              ))}
+            </Scroll>
+          </ScrollControls>
+        </Suspense>
+      )}
+    </>
   );
 };
 
@@ -198,7 +220,9 @@ export const Cart = ({ cart, setCart, onIncrement, onDecrement, onDelete }) => {
   const [showToast, setShowToast] = useState(false);
 
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cart
+      .reduce((total, item) => total + (item.price * item.quantity || 0), 0)
+      .toFixed(2);
   };
 
   const clearCart = () => {
@@ -519,7 +543,7 @@ function Gallery() {
       body: JSON.stringify({ productId: item.id, cartId: cartId }),
     });
 
-    console.log("this is response -> ",{ productId: item.id, cartId: cartId })
+    console.log("this is response -> ", { productId: item.id, cartId: cartId });
 
     if (response.ok) {
       alert("Product incremented successfully!");

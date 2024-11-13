@@ -88,35 +88,41 @@ const Navbar = () => {
     navigate("/");
   };
 
-  // Fetch cart items from the API if the user is logged in
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
     if (savedCart) {
       setCart(JSON.parse(savedCart));
     }
-
-    // Fetch cart details if a user is logged in
+  
     const token = localStorage.getItem("token");
+    
     async function getDetails() {
-      const response = await fetch(`${ENDPOINT}/api/cart/getCartItems`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
-      });
-
-      const data = await response.json();
-      setCart(data.items || []);  // Ensure cart is set to an array, even if the response is empty
-      console.log("This is the cart items:", data.items);
+      try {
+        const response = await fetch(`${ENDPOINT}/api/cart/getCartItems`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${token}`,
+          },
+        });
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+  
+        const data = await response.json();
+        setCart(data.items || []);  
+        console.log("This is the cart items:", data.items);
+      } catch (error) {
+        console.error("Failed to fetch cart items:", error);
+      }
     }
-
-    // Only fetch cart details if the user is logged in
+  
     if (user && token) {
       getDetails();
     }
-  }, [user]); // We only re-run this effect when 'user' changes
-
+  }, [user]); 
+  
   return (
     <div>
       <nav className="header">
@@ -175,11 +181,12 @@ const Navbar = () => {
           {/* Conditionally render Cart Icon if user is logged in */}
           {user && cart.length !== 0 && (
             <div
-              className="nav-icon"
-              onClick={() => {
-                setIsCartOpen(!isCartOpen);
-              }}
+            className="nav-icon"
+            onClick={() => {
+              setIsCartOpen(!isCartOpen);
+            }}
             >
+              {console.log("cart : ",cart)}
               <IoCartOutline />
               <span>Cart {cart.length}</span>
             </div>

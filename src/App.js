@@ -14,6 +14,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "./App.css";
 import AdminAddProduct from "./component/page/admin/AdminAddProduct";
 import Navbar from "./component/page/landing/header/navbar";
+// import User from "./user";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/admin" element={<><Navbar/><AdminAddProduct/></>}/>
+          {/* <Route path="/user" element={<User/>}/> */}
         </Routes>
       </Router>
   );
