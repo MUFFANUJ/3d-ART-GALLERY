@@ -509,7 +509,7 @@ function Gallery() {
         quantity: 1,
       });
       console.log("this is the userId and productId -> ", bodyd);
-
+    
       const response = await fetch(`${ENDPOINT}/api/cart/add`, {
         method: "POST",
         headers: {
@@ -518,19 +518,22 @@ function Gallery() {
         },
         body: bodyd,
       });
+    
       const data = await response.json();
-      console.log(data);
-      setCartId(data.cartItem.cartId);
-
-      if (response.ok) {
+      console.log("Server response:", data);
+    
+      if (response.ok && data?.cartItem?.cartId) {
+        setCartId(data.cartItem.cartId);
         alert("Product added successfully!");
       } else {
         alert("Failed to add product");
       }
+    
     } catch (error) {
       console.error("Error adding product:", error);
       alert("Failed to add product");
     }
+    
   };
 
   const handleIncrement = async (item) => {
